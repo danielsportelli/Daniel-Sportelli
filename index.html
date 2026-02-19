@@ -385,7 +385,7 @@
       flex-direction: column;
       box-shadow: 0 20px 40px rgba(37,99,235,0.2);
     }
-    /* Gradienti specifici per ogni corso - PIÙ INTENSI */
+    /* Gradienti specifici per ogni corso - PIÃ™ INTENSI */
     .card:nth-child(1) { 
       background: radial-gradient(ellipse 120% 100% at top right, rgba(220, 100, 50, 0.35) 0%, rgba(220, 100, 50, 0.15) 40%, var(--surface) 75%); 
     }
@@ -443,10 +443,15 @@
     }
     .c-meta { 
       display: flex; 
-      gap: 1.5rem; 
-      font-size: 0.85rem; 
+      gap: 0.75rem; 
+      font-size: 0.78rem; 
       color: var(--text-muted); 
       padding-top: 0.75rem;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+    .c-meta span {
+      white-space: nowrap;
     }
     .card-foot { 
       padding: 1.5rem 2rem; 
@@ -645,7 +650,7 @@
       color: var(--primary-light);
     }
     .f-disclaimer {
-      font-size: 0.7rem;
+      font-size: 0.6rem;
       font-weight: 300;
       color: #64748b;
       line-height: 1.7;
@@ -860,7 +865,7 @@
     <div class="nav-text">
       <span class="nav-name">
         Daniel Sportelli
-        <span class="verified-badge">✓</span>
+        <span class="verified-badge">âœ“</span>
       </span>
       <span class="nav-sub">Barman & Formatore</span>
     </div>
@@ -908,38 +913,37 @@
       Formazione <span class="highlight">Professionale</span>
     </h2>
     <p class="s-sub">
-      Scopri i miei corsi di mixology avanzata. Ogni corso è progettato per portare le tue competenze al livello successivo.
+      Scopri i miei corsi di mixology avanzata. Ogni corso Ã¨ progettato per portare le tue competenze al livello successivo.
     </p>
   </div>
 
   <!-- BUNDLE IN EVIDENZA -->
   <div class="bundle-card">
     <div class="bundle-content">
-      <div class="bundle-badge">⭐ OFFERTA SPECIALE</div>
+      <div class="bundle-badge">â­ OFFERTA SPECIALE</div>
       <h3 class="bundle-title">Bundle Completo - Tutti i Corsi</h3>
       <p class="bundle-desc">
-        Accedi a tutti i corsi disponibili con un'unica soluzione. Il pacchetto completo per diventare un bartender professionista a 360 gradi. <strong>Include anche tutti i futuri corsi che aggiungerò.</strong>
+        Accedi a tutti i corsi disponibili con un'unica soluzione. Il pacchetto completo per diventare un bartender professionista a 360 gradi.
       </p>
       <div class="bundle-meta">
         <div class="bundle-meta-item">
-          <span>📚</span>
+          <span>ðŸ“š</span>
           <span>6 Corsi (4 subito + 2 in arrivo)</span>
         </div>
         <div class="bundle-meta-item">
-          <span>⏱️</span>
-          <span>Da definire</span>
-        </div>
-        <div class="bundle-meta-item">
-          <span>💾</span>
-          <span>Accesso a Vita</span>
+          <span>â™¾ï¸</span>
+          <span><strong style="color: var(--text);">Accesso a Vita</strong> â€” guarda e riguarda quando vuoi, per sempre</span>
         </div>
       </div>
       <div class="bundle-footer">
         <div class="bundle-price">
-          <span class="bundle-price-value">€97</span>
-          <span class="bundle-price-label">Risparmia oltre il 50%</span>
+          <span class="bundle-price-value">â‚¬97</span>
+          <span class="bundle-price-label">Risparmi â‚¬51 sui corsi disponibili</span>
         </div>
-        <a href="#" class="bundle-cta">Acquista Ora →</a>
+        <a href="#" class="bundle-cta">Acquista Ora â†’</a>
+      </div>
+      <div style="margin-top: 1.2rem; padding: 1rem 1.2rem; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: 10px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+        ðŸŽ <strong style="color: var(--accent);">Inclusi gratuitamente (valore â‚¬74):</strong> riceverai anche <strong style="color: var(--text);">Garnish Pro</strong> e <strong style="color: var(--text);">Spirits Genesis</strong> non appena saranno disponibili â€” senza pagare nulla in piÃ¹.
       </div>
     </div>
   </div>
@@ -957,17 +961,17 @@
         <span class="tag">Fondamentale</span>
         <h3 class="c-title">Sciroppi Homemade</h3>
         <p class="c-desc">
-          Cosa sono gli sciroppi, metodi di estrazione e come crearli in casa per ingredienti di qualità professionale.
+          Zucchero, acqua e una buona tecnica non bastano. Impara a estrarre aromi, bilanciare dolcezze e creare sciroppi homemade che cambiano davvero il profilo di un cocktail.
         </p>
         <div class="c-meta">
-          <span>⏱️ Da definire</span>
-          <span>📹 Video + PDF</span>
-          <span>🎓 Certificato</span>
+          <span>â±ï¸ Da definire</span>
+          <span>ðŸ“¹ Video + PDF</span>
+          <span>ðŸŽ“ Certificato</span>
         </div>
       </div>
       <div class="card-foot">
-        <span class="price">€35 <small>/ Accesso a vita</small></span>
-        <a href="#" class="c-link">Scopri il corso →</a>
+        <span class="price">â‚¬37 <small>/ Accesso a vita</small></span>
+        <a href="#" class="c-link">Scopri il corso â†’</a>
       </div>
     </div>
 
@@ -977,17 +981,17 @@
         <span class="tag">Avanzato</span>
         <h3 class="c-title">Bitters e Tinture</h3>
         <p class="c-desc">
-          Scopri cosa sono bitters e tinture e impara a produrli homemade per personalizzare i tuoi cocktail.
+          Poche gocce che fanno tutta la differenza. Capisci come funzionano bitters e tinture, cosa contengono davvero e come produrli in casa per avere ingredienti unici che nessuno ha sul bancone.
         </p>
         <div class="c-meta">
-          <span>⏱️ Da definire</span>
-          <span>📹 Video + PDF</span>
-          <span>🎓 Certificato</span>
+          <span>â±ï¸ Da definire</span>
+          <span>ðŸ“¹ Video + PDF</span>
+          <span>ðŸŽ“ Certificato</span>
         </div>
       </div>
       <div class="card-foot">
-        <span class="price">€35 <small>/ Accesso a vita</small></span>
-        <a href="#" class="c-link">Scopri il corso →</a>
+        <span class="price">â‚¬37 <small>/ Accesso a vita</small></span>
+        <a href="#" class="c-link">Scopri il corso â†’</a>
       </div>
     </div>
 
@@ -997,17 +1001,17 @@
         <span class="tag">Avanzato</span>
         <h3 class="c-title">Spume, Arie e Velluti</h3>
         <p class="c-desc">
-          Tecniche professionali per creare texture aromatiche stabili che portano i tuoi cocktail al livello successivo.
+          Non solo estetica. Spume, arie e velluti aggiungono texture, aroma e sorpresa al primo sorso. Un corso per chi vuole che il cocktail si senta prima ancora di essere bevuto.
         </p>
         <div class="c-meta">
-          <span>⏱️ Da definire</span>
-          <span>📹 Video + PDF</span>
-          <span>🎓 Certificato</span>
+          <span>â±ï¸ Da definire</span>
+          <span>ðŸ“¹ Video + PDF</span>
+          <span>ðŸŽ“ Certificato</span>
         </div>
       </div>
       <div class="card-foot">
-        <span class="price">€35 <small>/ Accesso a vita</small></span>
-        <a href="#" class="c-link">Scopri il corso →</a>
+        <span class="price">â‚¬37 <small>/ Accesso a vita</small></span>
+        <a href="#" class="c-link">Scopri il corso â†’</a>
       </div>
     </div>
 
@@ -1017,17 +1021,17 @@
         <span class="tag">Specializzazione</span>
         <h3 class="c-title">Sfere & Gelatine</h3>
         <p class="c-desc">
-          Tecniche di sferificazione e gelificazione per creare cocktail molecolari spettacolari e innovativi.
+          Quando il cocktail diventa qualcosa che non ti aspetti. Sferificazione, gelificazione e tutto quello che serve per portare un drink oltre il bicchiere â€” senza magie, solo tecnica.
         </p>
         <div class="c-meta">
-          <span>⏱️ Da definire</span>
-          <span>📹 Video + PDF</span>
-          <span>🎓 Certificato</span>
+          <span>â±ï¸ Da definire</span>
+          <span>ðŸ“¹ Video + PDF</span>
+          <span>ðŸŽ“ Certificato</span>
         </div>
       </div>
       <div class="card-foot">
-        <span class="price">€35 <small>/ Accesso a vita</small></span>
-        <a href="#" class="c-link">Scopri il corso →</a>
+        <span class="price">â‚¬37 <small>/ Accesso a vita</small></span>
+        <a href="#" class="c-link">Scopri il corso â†’</a>
       </div>
     </div>
 
@@ -1037,12 +1041,12 @@
         <span class="tag">Coming Soon</span>
         <h3 class="c-title">Garnish Pro</h3>
         <p class="c-desc">
-          Tecniche avanzate di garnish: pittura edibile, isomalt, pasta di zucchero, spray, meringe, fogli colorati e foglie vetrificate.
+          Non tagli di frutta. Dal cioccolato plastico all'isomalt, dalla pittura edibile alle strutture vetrificate: un percorso completo per trasformare ogni cocktail in un'esperienza visiva. E c'Ã¨ molto altro ancora.
         </p>
         <div class="c-meta">
-          <span>⏱️ In Lavorazione</span>
-          <span>📹 Video + PDF</span>
-          <span>🎓 Certificato</span>
+          <span>â±ï¸ In Lavorazione</span>
+          <span>ðŸ“¹ Video + PDF</span>
+          <span>ðŸŽ“ Certificato</span>
         </div>
       </div>
       <div class="card-foot">
@@ -1057,12 +1061,12 @@
         <span class="tag">Coming Soon</span>
         <h3 class="c-title">Spirits Genesis</h3>
         <p class="c-desc">
-          Corso teorico avanzato: merceologia, fermentazione, distillazione, invecchiamento e approfondimento sui singoli distillati.
+          Come nasce davvero quello che hai nel bicchiere. Un corso teorico approfondito che attraversa fermentazione, distillazione, invecchiamento e merceologia distillato per distillato. Niente pratica, solo conoscenza pura â€” la piÃ¹ solida che puoi avere dietro a un bancone.
         </p>
         <div class="c-meta">
-          <span>⏱️ In Lavorazione</span>
-          <span>📹 Video + PDF</span>
-          <span>🎓 Certificato</span>
+          <span>â±ï¸ In Lavorazione</span>
+          <span>ðŸ“¹ Video + PDF</span>
+          <span>ðŸŽ“ Certificato</span>
         </div>
       </div>
       <div class="card-foot">
@@ -1080,7 +1084,7 @@
     <h2 class="a-name">Daniel Sportelli</h2>
     <p class="a-role">Barman & Formatore</p>
     <p class="a-text">
-      Con oltre 15 anni di esperienza nel settore, la mia passione è insegnare e divulgare l'arte della mixology. 
+      Con oltre 15 anni di esperienza nel settore, la mia passione Ã¨ insegnare e divulgare l'arte della mixology. 
       Amo trasmettere le mie conoscenze e vedere i miei allievi crescere professionalmente. Ogni corso che creo nasce dall'esperienza sul campo e dalla voglia di condividere tecniche che fanno davvero la differenza dietro al bancone.
     </p>
   </div>
@@ -1088,7 +1092,7 @@
 
 <section class="why-choose">
   <div class="section-header">
-    <h2 class="s-title">Perché Scegliere <span class="highlight">i Miei Corsi</span></h2>
+    <h2 class="s-title">PerchÃ© Scegliere <span class="highlight">i Miei Corsi</span></h2>
   </div>
   
   <div class="feats">
@@ -1156,10 +1160,15 @@
     24040 Ciserano (BG)
   </div>
   <div class="f-contact">
-    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8be2e5ede4cbefeae5e2eee7f8fbe4f9ffeee7e7e2a5e2ff">[email&#160;protected]</a>
+    <span style="color: var(--primary-light);">info@danielsportelli.it</span>
   </div>
   <p class="f-disclaimer">
     Questo sito non fa parte dei siti web di Facebook, Meta Inc., Google LLC o TikTok.<br>
-    Inoltre, questo sito NON è approvato da Facebook, Google o TikTok in alcun modo.<br>
-    Facebook è un marchio registrato di Meta Inc. Google è un marchio registrato di Google LLC.<br>
-    TikTok è un marchio registrato di ByteDan
+    Inoltre, questo sito NON Ã¨ approvato da Facebook, Google o TikTok in alcun modo.<br>
+    Facebook Ã¨ un marchio registrato di Meta Inc. Google Ã¨ un marchio registrato di Google LLC.<br>
+    TikTok Ã¨ un marchio registrato di ByteDance Ltd.
+  </p>
+  <div class="f-copy">Â© 2025 Daniel Sportelli. Tutti i diritti riservati.</div>
+</footer>
+</body>
+</html>
