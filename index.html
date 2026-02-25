@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Daniel Sportelli | Barman & Formatore</title>
+<meta name="description" content="Scopri tutti i miei corsi di mixology. Tecniche professionali per portare la tua miscelazione al livello avanzato.">
 <!-- GA4 -->
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-F7T6WNL4MY"></script>
@@ -24,7 +25,7 @@
 <meta name="twitter:description" content="Scopri tutti i miei corsi di mixology. Tecniche professionali per portare la tua miscelazione al livello avanzato.">
 <meta name="twitter:image" content="https://danielsportelli.github.io/academy/og-index.jpg">
 <link rel="canonical" href="https://danielsportelli.github.io/academy/">  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230f172a' stroke='url(%23g)' stroke-width='3'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232563eb'/><stop offset='1' stop-color='%23f59e0b'/></linearGradient></defs><text x='50' y='67' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='42' fill='%23f59e0b'>A</text></svg>"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -213,11 +214,12 @@
       border-color: var(--primary); 
       color: var(--primary-light); 
     }
-    .hero-stats { 
-      display: flex; 
-      gap: 1.5rem; 
-      margin-top: 7.5rem; 
-    }
+  .hero-stats { 
+  display: flex; 
+  gap: 1.5rem; 
+  margin-top: 7.5rem;
+  width: 80vw;
+}
     .stat { 
       background: var(--surface);
       border: 1px solid var(--border);
@@ -561,13 +563,13 @@
       line-height: 1.8; 
       text-align: center;
     }
-    .feats { 
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+  .feats { 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
     .feat { 
       background: var(--surface); 
       border: 1px solid var(--border); 
@@ -899,6 +901,19 @@
     padding: 3rem 6%;
   }
 }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-4px); }
+  30% { transform: translateX(4px); }
+  45% { transform: translateX(-3px); }
+  60% { transform: translateX(3px); }
+  75% { transform: translateX(-2px); }
+  90% { transform: translateX(2px); }
+}
+.bundle-cta {
+  animation: shake 2s ease-in-out 2s infinite;
+}
+</style>
   </style>
 </head>
 <body>
@@ -987,7 +1002,7 @@
         <a href="#" class="bundle-cta">Acquista Ora &#8594;</a>
       </div>
       <div style="margin-top: 1.2rem; padding: 1rem 1.2rem; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: 10px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-        &#127873; <strong style="color: var(--accent);">Inclusi gratuitamente (valore &euro;74):</strong> riceverai anche <strong style="color: var(--text);">Garnish Pro</strong> e <strong style="color: var(--text);">Spirits Genesis</strong> non appena saranno disponibili &mdash; senza pagare nulla in pi&ugrave;.
+        &#127873; <strong style="color: var(--accent);">Inclusi gratuitamente (valore &euro;74):</strong> riceverai anche <strong style="color: var(--text);">Garnish Pro</strong> e <strong style="color: var(--text);">Chiarificazioni</strong> non appena saranno disponibili &mdash; senza pagare nulla in pi&ugrave;.
       </div>
     </div>
   </div>
@@ -1022,7 +1037,7 @@
     <!-- Bitters e Tinture -->
     <div class="card">
       <div class="card-body">
-        <span class="tag">Avanzato</span>
+        <span class="tag">Botaniche</span>
         <h3 class="c-title">Bitters e Tinture</h3>
         <p class="c-desc">
           Poche gocce che fanno tutta la differenza. Capisci come funzionano bitters e tinture, cosa contengono davvero e come produrli in casa per avere ingredienti unici che nessuno ha sul bancone.
@@ -1042,7 +1057,7 @@
     <!-- Spume, Arie e Velluti -->
     <div class="card">
       <div class="card-body">
-        <span class="tag">Avanzato</span>
+        <span class="tag">Texture</span>
         <h3 class="c-title">Spume, Arie e Velluti</h3>
         <p class="c-desc">
           Non solo estetica. Spume, arie e velluti aggiungono texture, aroma e sorpresa al primo sorso. Un corso per chi vuole che il cocktail si senta prima ancora di essere bevuto.
@@ -1062,7 +1077,7 @@
     <!-- Sfere & Gelatine -->
     <div class="card">
       <div class="card-body">
-        <span class="tag">Specializzazione</span>
+        <span class="tag">Molecolare</span>
         <h3 class="c-title">Sfere & Gelatine</h3>
         <p class="c-desc">
           Quando il cocktail diventa qualcosa che non ti aspetti. Sferificazione, gelificazione e tutto quello che serve per portare un drink oltre il bicchiere &mdash; senza magie, solo tecnica.
@@ -1082,7 +1097,7 @@
     <!-- Garnish Pro - COMING SOON -->
     <div class="card">
       <div class="card-body">
-        <span class="tag">Coming Soon</span>
+        <span class="tag">Design</span>
         <h3 class="c-title">Garnish Pro</h3>
         <p class="c-desc">
           Non tagli di frutta. Dal cioccolato plastico all'isomalt, dalla pittura edibile alle strutture vetrificate: un percorso completo per trasformare ogni cocktail in un'esperienza visiva. E c'&egrave; molto altro ancora.
@@ -1099,13 +1114,13 @@
       </div>
     </div>
 
-    <!-- Spirits Genesis - COMING SOON -->
+    <!-- Chiarificazioni - COMING SOON -->
     <div class="card">
       <div class="card-body">
-        <span class="tag">Coming Soon</span>
-        <h3 class="c-title">Spirits Genesis</h3>
+        <span class="tag">Visual</span>
+        <h3 class="c-title">Chiarificazioni</h3>
         <p class="c-desc">
-          Come nasce davvero quello che hai nel bicchiere. Un corso teorico approfondito che attraversa fermentazione, distillazione, invecchiamento e merceologia distillato per distillato. Niente pratica, solo conoscenza pura &mdash; la pi&ugrave; solida che puoi avere dietro a un bancone.
+          Rendi ogni drink visivamente perfetto. Impara le tecniche di chiarificazione e filtrazione professionale &mdash; dalla cagliatura con latte e yogurt alla pectina, dall&rsquo;agar agar alla colla di pesce &mdash; per ottenere cocktail cristallini e impeccabili. Il trend dei cocktail bar di lusso, finalmente accessibile.
         </p>
         <div class="c-meta">
           <span>&#9201; In Lavorazione</span>
@@ -1203,16 +1218,38 @@
     Via Circonvallazione Nord 77<br>
     24040 Ciserano (BG)
   </div>
-  <div class="f-contact">
-    <span style="color: var(--primary-light);">info@danielsportelli.it</span>
-  </div>
   <p class="f-disclaimer">
     Questo sito non fa parte dei siti web di Facebook, Meta Inc., Google LLC o TikTok.<br>
     Inoltre, questo sito NON &egrave; approvato da Facebook, Google o TikTok in alcun modo.<br>
     Facebook &egrave; un marchio registrato di Meta Inc. Google &egrave; un marchio registrato di Google LLC.<br>
     TikTok &egrave; un marchio registrato di ByteDance Ltd.
   </p>
-  <div class="f-copy">&copy; 2025 Daniel Sportelli. Tutti i diritti riservati.</div>
+<div class="f-copy">&copy; <span id="year"></span> Daniel Sportelli. Tutti i diritti riservati.</div>
 </footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script>
+  // Propaga UTM a tutti i link in uscita
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var utm_source = params.get('utm_source');
+    var utm_medium = params.get('utm_medium');
+    
+    if (!utm_source) return;
+    
+    var links = document.querySelectorAll('a[href]');
+    links.forEach(function(link) {
+      var href = link.getAttribute('href');
+      if (!href || href === '#' || href.startsWith('mailto:')) return;
+      
+      var url = new URL(href, window.location.href);
+      if (utm_source) url.searchParams.set('utm_source', utm_source);
+      if (utm_medium) url.searchParams.set('utm_medium', utm_medium);
+      url.searchParams.set('utm_content', 'academy');
+      link.setAttribute('href', url.toString());
+    });
+  })();
+</script>
 </body>
 </html>
