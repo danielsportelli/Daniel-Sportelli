@@ -252,6 +252,9 @@
 
   .cta-card:active { transform: scale(0.98); }
 
+  .cta-card.no-link { cursor: default; }
+  .cta-card.no-link:active { transform: none; }
+
   @media (hover: hover) {
     .cta-card.amber:hover {
       transform: translateY(-2px);
@@ -266,6 +269,11 @@
     .cta-card:hover .cta-arrow { transform: translateX(3px); }
     .cta-card.amber:hover .cta-arrow { color: var(--amber); }
     .cta-card.blue:hover .cta-arrow  { color: var(--blue-l); }
+    .cta-card.no-link:hover {
+      transform: none;
+      border-color: rgba(197,138,42,0.3);
+      box-shadow: 0 4px 20px rgba(197,138,42,0.12);
+    }
   }
 
   .cta-icon {
@@ -427,18 +435,52 @@
       </div>
     </div>
     <h1 class="hero-name">Daniel <span>Sportelli</span></h1>
-    <p class="hero-tagline">Bartender e formatore da 15 anni.</p>
+    <p class="hero-tagline">Bartender professionista, formatore e consulente.</p>
   </div>
 
   <!-- FORMAZIONE -->
   <p class="section-label">Formazione</p>
   <div class="formazione">
     <div class="formazione-eyebrow">Docenza &amp; Formazione</div>
-    <div class="formazione-title">Porto il mestiere in aula da oltre 15 anni.</div>
-    <div class="formazione-text">Co-fondatore di Botanic Academy, la mia scuola di bartending a Bergamo. Collaboro con enti di formazione accreditati nell'ambito dei corsi Barman finanziati da Regione Lombardia (corsi GOL, con ABF). Materiale didattico originale, laboratori pratici e un approccio costruito su quindici anni di lavoro reale dietro al bancone.</div>
+    <div class="formazione-title">Porto l'esperienza in aula.</div>
+    <div class="formazione-text">Co-fondatore di Botanic Academy, scuola di barman ad Arcene (BG). Corsi Barman accreditati (Regione Lombardia, GOL). Materiali didattici originali e laboratori pratici.</div>
   </div>
 
-  <!-- CTA PROGETTI -->
+  <!-- SERVIZI -->
+  <p class="section-label">Servizi</p>
+  <div class="cta-stack">
+
+    <div class="cta-card amber no-link">
+      <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><rect x="7.2" y="6.2" width="2" height="2"/><rect x="11" y="6.2" width="2" height="2"/><rect x="14.8" y="6.2" width="2" height="2"/><rect x="7.2" y="10.2" width="2" height="2"/><rect x="14.8" y="10.2" width="2" height="2"/><rect x="9.5" y="14.5" width="5" height="6.5"/></svg></div>
+      <div class="cta-text">
+        <div class="cta-title">Hotel Cocktail System</div>
+        <div class="cta-desc">Programma dedicato agli hotel.</div>
+        <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Contattami per ricevere la presentazione.</div>
+      </div>
+    </div>
+
+    <div class="cta-card amber no-link">
+      <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="2.3"/><circle cx="5.5" cy="16" r="2.3"/><circle cx="18.5" cy="16" r="2.3"/><line x1="12" y1="8.3" x2="6.7" y2="14"/><line x1="12" y1="8.3" x2="17.3" y2="14"/><line x1="7.6" y1="16" x2="16.4" y2="16"/></svg></div>
+      <div class="cta-text">
+        <div class="cta-title">Team Cocktail Experience</div>
+        <div class="cta-desc">Format di team building aziendale.</div>
+        <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Contattami per ricevere la presentazione.</div>
+      </div>
+    </div>
+
+    <a id="card-ccc" href="/ccc.html" class="cta-card amber" onclick="if(typeof gtag==='function')gtag('event','click_ccc',{event_category:'cta'});if(typeof fbq==='function')fbq('trackCustom','ClickCTA',{content_name:'ccc'});if(typeof ttq!=='undefined')ttq.track('ClickButton',{content_name:'ccc'});">
+      <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3c0 5 3 8 6 8s6-3 6-8"/><line x1="12" y1="11" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg></div>
+      <div class="cta-text">
+        <div class="cta-title">CCC</div>
+        <div class="cta-desc">Corporate Cocktail Catering.</div>
+        <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Calcola il preventivo online.</div>
+      </div>
+      <span class="cta-arrow">→</span>
+    </a>
+
+  </div>
+
+  <!-- PROGETTI -->
   <p class="section-label">Progetti</p>
   <div class="cta-stack">
 
@@ -448,16 +490,6 @@
         <div class="cta-title">Cocktail Legend</div>
         <div class="cta-desc">L'app italiana per bartender professionisti.</div>
         <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Registrati gratis e provala subito!</div>
-      </div>
-      <span class="cta-arrow">→</span>
-    </a>
-
-    <a id="card-bc" href="https://theonebar.it" class="cta-card amber" target="_blank" rel="noopener" onclick="if(typeof gtag==='function')gtag('event','click_bar_catering',{event_category:'cta'});if(typeof fbq==='function')fbq('trackCustom','ClickCTA',{content_name:'bar_catering'});if(typeof ttq!=='undefined')ttq.track('ClickButton',{content_name:'bar_catering'});">
-      <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3c0 5 3 8 6 8s6-3 6-8"/><line x1="12" y1="11" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg></div>
-      <div class="cta-text">
-        <div class="cta-title">The One</div>
-        <div class="cta-desc">Private bar catering.</div>
-        <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Il tuo evento, senza pensieri.</div>
       </div>
       <span class="cta-arrow">→</span>
     </a>
@@ -491,15 +523,6 @@
   var clCard = document.getElementById('card-cl');
   if (clCard) {
     clCard.href = buildUrl('https://cocktaillegend.app', {
-      utm_source:   'danielsportelli',
-      utm_medium:   'referral',
-      utm_campaign: 'homepage_card'
-    });
-  }
-
-  var bcCard = document.getElementById('card-bc');
-  if (bcCard) {
-    bcCard.href = buildUrl('https://theonebar.it', {
       utm_source:   'danielsportelli',
       utm_medium:   'referral',
       utm_campaign: 'homepage_card'
