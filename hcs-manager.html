@@ -117,11 +117,14 @@ input, select, button{ max-width:100%; }
 /* CARDS LIST (cocktail) */
 .drink-card{ background:var(--white); border:1px solid var(--border); margin-bottom:9px; }
 .drink-row{
-  display:flex; align-items:center; gap:10px; padding:12px 14px; cursor:pointer;
+  display:flex; align-items:flex-start; gap:10px; padding:12px 14px; cursor:pointer;
 }
-.drink-row .dn{ flex:1; font-weight:700; font-size:13.5px; font-family:'Manrope',sans-serif; }
-.drink-row .dcost{ font-size:11.5px; color:var(--txt2); width:64px; text-align:right; }
-.drink-row .dprice{ width:76px; }
+.drink-row .chev{ align-self:center; margin-top:1px; }
+.drink-row .dn{ flex:1; font-weight:700; font-size:13.5px; font-family:'Manrope',sans-serif; align-self:center; }
+.drink-row .dcost{ font-size:11.5px; color:var(--txt2); width:72px; text-align:right; }
+.drink-row .dprice{ width:82px; }
+.drink-row .badge{ align-self:center; }
+.drink-row .dcost .lbl, .drink-row .dprice .lbl{ display:block; font-size:8px; line-height:1.3; text-transform:uppercase; letter-spacing:0.2px; color:#B0ADA5; margin-bottom:3px; text-align:right; }
 .drink-row .dprice input{
   width:100%; border:1px solid var(--border); padding:5px 6px; font-size:12.5px; text-align:right;
   font-family:'Poppins',sans-serif;
@@ -130,7 +133,10 @@ input, select, button{ max-width:100%; }
 .chev{ width:14px; height:14px; color:var(--txt2); transition:transform .15s; flex-shrink:0; }
 .drink-card.open .chev{ transform:rotate(90deg); }
 
-.badge{ font-size:10px; font-weight:700; padding:3px 8px; border-radius:20px; white-space:nowrap; }
+/* REPORT - small column labels */
+.report-row .rv .lbl{ display:block; font-size:8px; line-height:1.3; text-transform:uppercase; letter-spacing:0.2px; color:#B0ADA5; margin-bottom:3px; text-align:right; }
+
+.badge{ font-size:10px; font-weight:700; padding:3px 8px; border-radius:20px; white-space:nowrap; width:78px; text-align:center; box-sizing:border-box; flex-shrink:0; }
 .badge.green{ background:var(--green-bg); color:var(--green); }
 .badge.yellow{ background:var(--yellow-bg); color:var(--yellow); }
 .badge.red{ background:var(--red-bg); color:var(--red); }
@@ -227,7 +233,7 @@ footer.app-footer{
 }
 .report-row:first-child{ border-top:1px solid var(--border); }
 .report-row .rn{ flex:1; font-weight:600; font-size:12.5px; }
-.report-row .rv{ font-size:11.5px; color:var(--txt2); width:58px; text-align:right; }
+.report-row .rv{ font-size:11.5px; color:var(--txt2); width:64px; text-align:right; }
 
 /* DATI */
 .dati-box{ background:var(--white); border:1px solid var(--border); padding:20px 18px; margin-bottom:14px; text-align:center; }
@@ -250,7 +256,7 @@ input[type="file"]{ display:none; }
 
 <nav class="tabbar">
   <button data-tab="prodotti" class="active">Prodotti</button>
-  <button data-tab="cocktail">Cocktail</button>
+  <button data-tab="cocktail">Drink List</button>
   <button data-tab="report">Report</button>
   <button data-tab="dati">Dati</button>
 </nav>
@@ -296,7 +302,7 @@ input[type="file"]{ display:none; }
     <div class="dati-box">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V8"/><path d="M7 13l5-5 5 5"/><path d="M4 5h16"/></svg>
       <h3>Ricarica progetto</h3>
-      <p>Carica un file .hcs esportato in precedenza per ripristinare prodotti, drink list e impostazioni.</p>
+      <p>Carica il tuo file .hcs esportato in precedenza per ripristinare prodotti, drink list e impostazioni.</p>
       <label class="btn outline" for="dati-file-input">Scegli file .hcs</label>
       <input type="file" id="dati-file-input" accept=".hcs,.json" onchange="caricaProgetto(event)">
     </div>
@@ -893,7 +899,7 @@ function statoDaPct(pct, hotel){
 }
 
 function labelStato(stato){
-  return { green:'Ideale', yellow:'Troppo alto', red:'Troppo basso' }[stato] || '—';
+  return { green:'In target', yellow:'Margine alto', red:'Margine basso' }[stato] || '—';
 }
 
 
@@ -1073,8 +1079,9 @@ function renderDrinkCard(c){
       <div class="drink-row" onclick="toggleDrink('${c.id}')">
         ${ICONS.chev}
         <div class="dn">${escapeHtml(c.nome)}</div>
-        <div class="dcost">${fmtMoney(costo)}</div>
+        <div class="dcost"><span class="lbl">Drink Cost<br>IVA escl.</span>${fmtMoney(costo)}</div>
         <div class="dprice" onclick="event.stopPropagation()">
+          <span class="lbl">Prezzo Vendita<br>IVA incl.</span>
           <input type="number" step="0.5" value="${c.prezzoVendita}" onchange="setPrezzoVendita('${c.id}', this.value)">
         </div>
         <span class="badge ${stato}">${labelStato(stato)}</span>
@@ -1206,6 +1213,7 @@ function renderReport(){
 
   const nCocktail = cocktailOnly.length;
   const nDistillati = distillatiOnly.length;
+  const costoMedia = calcolati.length ? calcolati.reduce((s,x)=>s+x.r.costo,0)/calcolati.length : 0;
   const pctMedia = calcolati.length ? calcolati.reduce((s,x)=>s+x.r.pct,0)/calcolati.length : 0;
   const margineMedia = calcolati.length ? calcolati.reduce((s,x)=>s+x.r.margine,0)/calcolati.length : 0;
   const nTarget = calcolati.filter(x => statoDaPct(x.r.pct, STATE.hotel)==='green').length;
@@ -1216,14 +1224,18 @@ function renderReport(){
     <div class="kpi-grid">
       <div class="kpi-card"><div class="kpi-num">${nCocktail}</div><div class="kpi-label">Cocktail</div></div>
       <div class="kpi-card"><div class="kpi-num">${nDistillati}</div><div class="kpi-label">Distillati</div></div>
+      <div class="kpi-card"><div class="kpi-num">${fmtMoney(costoMedia)}</div><div class="kpi-label">Drink Cost medio (netto IVA)</div></div>
       <div class="kpi-card"><div class="kpi-num">${fmtPct(pctMedia)}</div><div class="kpi-label">Beverage Cost medio</div></div>
       <div class="kpi-card"><div class="kpi-num">${fmtMoney(margineMedia)}</div><div class="kpi-label">Margine medio (netto IVA)</div></div>
     </div>
     <div class="kpi-grid kpi-target-row">
-      <div class="kpi-card"><div class="kpi-num" style="color:var(--red);">${nTroppoBasso}</div><div class="kpi-label">Prezzo troppo basso</div></div>
-      <div class="kpi-card"><div class="kpi-num" style="color:var(--yellow);">${nTroppoAlto}</div><div class="kpi-label">Prezzo troppo alto</div></div>
+      <div class="kpi-card"><div class="kpi-num" style="color:var(--red);">${nTroppoBasso}</div><div class="kpi-label">Margine basso (Bev. Cost sopra soglia)</div></div>
+      <div class="kpi-card"><div class="kpi-num" style="color:var(--yellow);">${nTroppoAlto}</div><div class="kpi-label">Margine alto (Bev. Cost sotto soglia)</div></div>
       <div class="kpi-card"><div class="kpi-num" style="color:var(--green);">${nTarget}</div><div class="kpi-label">In target</div></div>
-    </div>`;
+    </div>
+    <p style="font-size:11px;color:var(--txt2);line-height:1.5;margin:-6px 0 16px;">
+      Gli stati indicano il posizionamento del Beverage Cost % rispetto alla soglia impostata (${STATE.hotel.sogliaMin}%–${STATE.hotel.sogliaMax}%): non sono un errore da correggere, solo un riferimento — puoi comunque scegliere di alzare o abbassare il prezzo.
+    </p>`;
 
   const rowsHtml = calcolati
     .sort((a,b)=> a.c.nome.localeCompare(b.c.nome))
@@ -1231,9 +1243,10 @@ function renderReport(){
       const stato = statoDaPct(r.pct, STATE.hotel);
       return `<div class="report-row" onclick="apriDaReport('${c.id}')">
         <div class="rn">${escapeHtml(c.nome)}</div>
-        <div class="rv">${fmtMoney(r.costo)}</div>
-        <div class="rv">${fmtMoney(c.prezzoVendita)}</div>
-        <div class="rv">${fmtPct(r.pct)}</div>
+        <div class="rv"><span class="lbl">Drink Cost<br>IVA escl.</span>${fmtMoney(r.costo)}</div>
+        <div class="rv"><span class="lbl">Prezzo<br>IVA escl.</span>${fmtMoney(r.prezzoNetto)}</div>
+        <div class="rv"><span class="lbl">Prezzo<br>IVA incl.</span>${fmtMoney(c.prezzoVendita)}</div>
+        <div class="rv"><span class="lbl">Bev.<br>Cost</span>${fmtPct(r.pct)}</div>
         <span class="badge ${stato}">${labelStato(stato)}</span>
       </div>`;
     }).join('');
@@ -1252,9 +1265,7 @@ function apriDaReport(id){
 
 // ================= DATI: EXPORT / IMPORT =================
 function nomeFileBase(){
-  const h = (STATE.hotel.nome || 'progetto').trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
-  const data = new Date().toISOString().slice(0,10);
-  return `hcs-${h || 'progetto'}-${data}`;
+  return 'hcs-report';
 }
 
 function esportaTutto(){
@@ -1332,20 +1343,21 @@ function esportaPdf(){
   // ---- PAGINA PRODOTTI ----
   let y = intestazione('Situazione Prodotti');
   doc.setTextColor(...dark); doc.setFont('helvetica','bold'); doc.setFontSize(9);
-  const colsP = [marginX, 210, 300, 370, 440, 500];
-  ['Prodotto','Categoria','Formato','Netto','IVA%','Fornitore'].forEach((h,i)=> doc.text(h, colsP[i], y));
+  const colsP = [marginX, 185, 250, 310, 400, 480];
+  ['Prodotto','Categoria','Formato','Prezzo Netto','Tot. IVA inclusa','Fornitore'].forEach((h,i)=> doc.text(h, colsP[i], y));
   y += 8; riga(y); y += 14;
   doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
   [...STATE.prodotti].sort((a,b)=>a.nome.localeCompare(b.nome)).forEach(p=>{
     if(y > pageH - 60){ piePagina(); doc.addPage(); y = intestazione('Situazione Prodotti (segue)'); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); }
+    const prezzoLordo = p.prezzoNetto * (1 + (p.iva||0)/100);
     doc.setTextColor(...dark);
-    doc.text(String(p.nome).slice(0,26), colsP[0], y);
+    doc.text(String(p.nome).slice(0,24), colsP[0], y);
     doc.setTextColor(...grey);
     doc.text(String(p.categoria||''), colsP[1], y);
     doc.text(p.formatoMl + ' ml', colsP[2], y);
     doc.text(fmtMoney(p.prezzoNetto), colsP[3], y);
-    doc.text((p.iva||0) + '%', colsP[4], y);
-    doc.text(String(p.fornitore||'—').slice(0,16), colsP[5], y);
+    doc.text(fmtMoney(prezzoLordo), colsP[4], y);
+    doc.text(String(p.fornitore||'—').slice(0,14), colsP[5], y);
     y += 16;
   });
   piePagina();
@@ -1354,26 +1366,65 @@ function esportaPdf(){
   doc.addPage();
   y = intestazione('Drink List — Report');
   const calcolati = STATE.cocktail.map(c => ({ c, r: calcolaCocktail(c, STATE.prodotti, STATE.hotel) }));
+  const cocktailOnlyPdf = STATE.cocktail.filter(c => c.tipo !== 'distillato');
+  const distillatiOnlyPdf = STATE.cocktail.filter(c => c.tipo === 'distillato');
+  const nCocktailPdf = cocktailOnlyPdf.length;
+  const nDistillatiPdf = distillatiOnlyPdf.length;
+  const pctMediaPdf = calcolati.length ? calcolati.reduce((s,x)=>s+x.r.pct,0)/calcolati.length : 0;
+  const margineMediaPdf = calcolati.length ? calcolati.reduce((s,x)=>s+x.r.margine,0)/calcolati.length : 0;
+  const nTargetPdf = calcolati.filter(x => statoDaPct(x.r.pct, STATE.hotel)==='green').length;
+  const nBassoPdf = calcolati.filter(x => statoDaPct(x.r.pct, STATE.hotel)==='red').length;
+  const nAltoPdf = calcolati.filter(x => statoDaPct(x.r.pct, STATE.hotel)==='yellow').length;
+
+  function kpiCard(x, cardW, cardH, num, label, color){
+    doc.setDrawColor(230,230,230); doc.setFillColor(255,255,255);
+    doc.roundedRect(x, y, cardW, cardH, 3, 3, 'FD');
+    doc.setFont('helvetica','bold'); doc.setFontSize(13);
+    doc.setTextColor(...(color || dark));
+    doc.text(String(num), x + cardW/2, y + 22, { align:'center' });
+    doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
+    doc.setTextColor(...grey);
+    doc.text(label, x + cardW/2, y + 36, { align:'center', maxWidth: cardW - 10 });
+  }
+  const cardGap = 8;
+  const row1W = (pageW - 2*marginX - 3*cardGap) / 4;
+  const row1H = 46;
+  kpiCard(marginX, row1W, row1H, nCocktailPdf, 'Cocktail');
+  kpiCard(marginX + (row1W+cardGap)*1, row1W, row1H, nDistillatiPdf, 'Distillati');
+  kpiCard(marginX + (row1W+cardGap)*2, row1W, row1H, fmtPct(pctMediaPdf), 'Beverage Cost medio');
+  kpiCard(marginX + (row1W+cardGap)*3, row1W, row1H, fmtMoney(margineMediaPdf), 'Margine medio (netto IVA)');
+  y += row1H + 10;
+  const row2W = (pageW - 2*marginX - 2*cardGap) / 3;
+  const row2H = 40;
+  kpiCard(marginX, row2W, row2H, nBassoPdf, 'Margine basso', [196,61,61]);
+  kpiCard(marginX + (row2W+cardGap)*1, row2W, row2H, nAltoPdf, 'Margine alto', [184,134,11]);
+  kpiCard(marginX + (row2W+cardGap)*2, row2W, row2H, nTargetPdf, 'In target', [30,142,90]);
+  y += row2H + 20;
+
   doc.setTextColor(...dark); doc.setFont('helvetica','bold'); doc.setFontSize(9);
-  const colsD = [marginX, 250, 320, 400, 470];
-  ['Drink','Drink Cost','Prezzo','Bev. Cost %','Stato'].forEach((h,i)=> doc.text(h, colsD[i], y));
+  const colsD = [marginX, 230, 320, 410, 480];
+  ['Drink','Drink Cost','Prezzo di Vendita','Bev. Cost %','Stato'].forEach((h,i)=> doc.text(h, colsD[i], y));
   y += 8; riga(y); y += 14;
   doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
   calcolati.sort((a,b)=>a.c.nome.localeCompare(b.c.nome)).forEach(({c,r})=>{
-    if(y > pageH - 60){ piePagina(); doc.addPage(); y = intestazione('Drink List — Report (segue)'); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); }
+    if(y > pageH - 70){ piePagina(); doc.addPage(); y = intestazione('Drink List — Report (segue)'); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); }
     const stato = statoDaPct(r.pct, STATE.hotel);
     const colStato = stato==='green' ? [30,142,90] : stato==='yellow' ? [184,134,11] : [196,61,61];
     doc.setTextColor(...dark);
-    doc.text(String(c.nome).slice(0,30), colsD[0], y);
+    doc.text(String(c.nome).slice(0,28), colsD[0], y);
     doc.setTextColor(...grey);
     doc.text(fmtMoney(r.costo), colsD[1], y);
-    doc.text(fmtMoney(c.prezzoVendita), colsD[2], y);
+    doc.text(fmtMoney(r.prezzoNetto), colsD[2], y);
     doc.text(fmtPct(r.pct), colsD[3], y);
     doc.setTextColor(...colStato); doc.setFont('helvetica','bold');
     doc.text(labelStato(stato), colsD[4], y);
     doc.setFont('helvetica','normal');
     y += 16;
   });
+  y += 10;
+  if(y > pageH - 40){ piePagina(); doc.addPage(); y = intestazione('Drink List — Report (segue)'); }
+  doc.setFont('helvetica','italic'); doc.setFontSize(7.5); doc.setTextColor(...grey);
+  doc.text('I prezzi in questa sezione sono espressi IVA esclusa.', marginX, y);
   piePagina();
 
   doc.save(nomeFileBase() + '.pdf');
