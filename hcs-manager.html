@@ -114,17 +114,42 @@ input, select, button{ max-width:100%; }
   color:var(--gold); border:1px solid var(--gold); padding:2px 7px; border-radius:20px; margin-top:2px;
 }
 
+/* GIACENZE / ORDINE */
+.giac-row{
+  background:var(--white); border:1px solid var(--border); padding:12px 14px; margin-bottom:8px;
+  display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap;
+}
+.giac-name{ flex:1; min-width:120px; }
+.giac-name .gn{ font-weight:700; font-size:13px; font-family:'Manrope',sans-serif; margin-bottom:3px; }
+.giac-figures{ display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
+.giac-top{ display:flex; gap:14px; }
+.giac-col{ font-size:13px; color:var(--txt); text-align:right; min-width:60px; }
+.giac-col .lbl{ display:block; font-size:9px; text-transform:uppercase; letter-spacing:0.3px; color:#B0ADA5; margin-bottom:3px; }
+.giac-col input{
+  width:60px; border:1px solid var(--border); padding:5px 6px; font-size:13px; text-align:right;
+  font-family:'Poppins',sans-serif;
+}
+.giac-ordina{ display:flex; align-items:center; gap:8px; font-weight:700; text-align:right; }
+.giac-ordina .lbl{ color:var(--txt); font-size:9px; text-transform:uppercase; letter-spacing:0.3px; margin-bottom:0; }
+.giac-ordina .ord-num{ color:var(--gold); border:1.5px solid var(--gold); padding:3px 10px; font-size:14px; min-width:24px; text-align:center; }
+.giac-ordina .ord-cartoni{ font-size:10px; color:var(--txt2); font-weight:400; }
+.giac-cartoni{ font-size:9.5px; color:var(--txt2); margin-top:3px; }
+
 /* CARDS LIST (cocktail) */
 .drink-card{ background:var(--white); border:1px solid var(--border); margin-bottom:9px; }
 .drink-row{
-  display:flex; align-items:flex-start; gap:10px; padding:12px 14px; cursor:pointer;
+  display:flex; flex-direction:column; gap:9px; padding:12px 14px; cursor:pointer;
 }
+.drink-row .dr-top{ display:flex; align-items:flex-start; gap:10px; }
+.drink-row .sel-check{ align-self:center; display:flex; }
+.drink-row .sel-check input{ width:17px; height:17px; accent-color:var(--gold, #b8974e); cursor:pointer; }
 .drink-row .chev{ align-self:center; margin-top:1px; }
-.drink-row .dn{ flex:1; font-weight:700; font-size:13.5px; font-family:'Manrope',sans-serif; align-self:center; }
-.drink-row .dcost{ font-size:11.5px; color:var(--txt2); width:72px; text-align:right; }
-.drink-row .dprice{ width:82px; }
-.drink-row .badge{ align-self:center; }
-.drink-row .dcost .lbl, .drink-row .dprice .lbl{ display:block; font-size:8px; line-height:1.3; text-transform:uppercase; letter-spacing:0.2px; color:#B0ADA5; margin-bottom:3px; text-align:right; }
+.drink-row .dn{ flex:1; font-weight:700; font-size:13.5px; font-family:'Manrope',sans-serif; align-self:center; line-height:1.3; overflow-wrap:normal; word-break:keep-all; }
+.drink-row .dr-bottom{ display:flex; align-items:flex-start; gap:14px; padding-left:27px; }
+.drink-row .dcost{ font-size:11.5px; color:var(--txt2); width:auto; text-align:left; }
+.drink-row .dprice{ width:110px; }
+.drink-row .badge{ align-self:flex-start; flex-shrink:0; }
+.drink-row .dcost .lbl, .drink-row .dprice .lbl{ display:block; font-size:8px; line-height:1.3; text-transform:uppercase; letter-spacing:0.2px; color:#B0ADA5; margin-bottom:3px; text-align:left; min-height:21px; }
 .drink-row .dprice input{
   width:100%; border:1px solid var(--border); padding:5px 6px; font-size:12.5px; text-align:right;
   font-family:'Poppins',sans-serif;
@@ -228,12 +253,14 @@ footer.app-footer{
 .kpi-num.gold{ color:var(--gold); }
 .kpi-label{ font-size:10px; color:var(--txt2); text-transform:uppercase; letter-spacing:0.3px; margin-top:5px; }
 .report-row{
-  display:flex; align-items:center; gap:10px; padding:11px 14px; background:var(--white);
+  display:flex; flex-direction:column; gap:8px; padding:12px 14px; background:var(--white);
   border:1px solid var(--border); border-top:none; cursor:pointer;
 }
 .report-row:first-child{ border-top:1px solid var(--border); }
-.report-row .rn{ flex:1; font-weight:600; font-size:12.5px; }
-.report-row .rv{ font-size:11.5px; color:var(--txt2); width:64px; text-align:right; }
+.report-row .rr-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.report-row .rn{ font-weight:600; font-size:13px; line-height:1.3; overflow-wrap:normal; word-break:keep-all; }
+.report-row .rr-vals{ display:flex; gap:0; }
+.report-row .rv{ font-size:11.5px; color:var(--txt2); width:25%; text-align:right; }
 
 /* DATI */
 .dati-box{ background:var(--white); border:1px solid var(--border); padding:20px 18px; margin-bottom:14px; text-align:center; }
@@ -257,8 +284,9 @@ input[type="file"]{ display:none; }
 <nav class="tabbar">
   <button data-tab="prodotti" class="active">Prodotti</button>
   <button data-tab="cocktail">Drink List</button>
-  <button data-tab="report">Report</button>
-  <button data-tab="dati">Dati</button>
+  <button data-tab="giacenze">Giacenze</button>
+  <button data-tab="report">KPI</button>
+  <button data-tab="dati">Report</button>
 </nav>
 
 <main>
@@ -273,6 +301,8 @@ input[type="file"]{ display:none; }
     </div>
     <p style="font-size:10.5px;color:var(--txt2);line-height:1.5;margin:-6px 0 14px;">Il prezzo netto include già le accise (IVA esclusa). Il prezzo "IVA inclusa" è mostrato solo come riferimento, per confrontarlo col prezzo finito che si trova sul mercato.</p>
     <div id="prodotti-list"></div>
+    <button class="btn outline" style="width:auto;margin-top:22px;font-size:11px;padding:8px 14px;" onclick="ripristinaProdottiBase()">Ripristina prodotti di base</button>
+    <p style="font-size:10px;color:var(--txt2);margin-top:4px;">Aggiorna i prodotti standard (nome invariato) ai valori più recenti del listino. Non tocca prodotti con nome personalizzato né le giacenze.</p>
   </div>
 
   <!-- COCKTAIL -->
@@ -290,6 +320,16 @@ input[type="file"]{ display:none; }
 
   <!-- REPORT -->
   <div class="view" id="view-report"></div>
+
+  <!-- GIACENZE / ORDINE -->
+  <div class="view" id="view-giacenze">
+    <p style="font-size:11.5px;color:var(--txt2);margin:0 0 12px;">
+      Elenco basato solo sui drink e distillati selezionati (flag ✓) in Drink List. La giacenza minima si modifica dalla scheda del singolo prodotto in "Prodotti".
+    </p>
+    <div id="giacenze-list"></div>
+    <button class="btn gold" style="width:100%;margin-top:16px;" onclick="esportaOrdinePDF('completo')">Genera Ordine Completo (Start Servizio)</button>
+    <button class="btn outline" style="width:100%;margin-top:8px;" onclick="esportaOrdinePDF('personalizzato')">Genera Ordine Personalizzato</button>
+  </div>
 
   <!-- DATI -->
   <div class="view" id="view-dati">
@@ -349,6 +389,7 @@ input[type="file"]{ display:none; }
       <div class="field"><label>IVA %</label><input id="pm-iva" type="number"></div>
     </div>
     <div class="field"><label>Fornitore (facoltativo)</label><input id="pm-fornitore" type="text" placeholder="Partesa"></div>
+    <div class="field"><label>Giacenza minima (bottiglie/pezzi da tenere sempre in cantina)</label><input id="pm-giacenza" type="number" step="1" min="0"></div>
     <div class="modal-actions">
       <button class="btn outline" id="pm-delete" onclick="eliminaProdotto()">Elimina</button>
       <button class="btn gold" onclick="salvaProdotto()">Salva</button>
@@ -782,73 +823,95 @@ function uid(prefix){ return prefix + '_' + Math.random().toString(36).slice(2,9
 
 // ---- Prodotti di base precompilati (prezzo netto IVA esclusa, formato in ml) ----
 const DEFAULT_PRODOTTI = [
-  { nome:'Gin London Dry',        categoria:'Distillati', formatoMl:700,  prezzoNetto:14.00 },
-  { nome:'Vodka',                 categoria:'Distillati', formatoMl:700,  prezzoNetto:12.00 },
-  { nome:'Rum Bianco',            categoria:'Distillati', formatoMl:700,  prezzoNetto:13.00 },
-  { nome:'Rum Ambrato',           categoria:'Distillati', formatoMl:700,  prezzoNetto:15.00 },
-  { nome:'Whisky Blended',        categoria:'Distillati', formatoMl:700,  prezzoNetto:14.00 },
-  { nome:'Tequila Blanco',        categoria:'Distillati', formatoMl:700,  prezzoNetto:18.00 },
-  { nome:'Cognac VS',             categoria:'Distillati', formatoMl:700,  prezzoNetto:25.00 },
-  { nome:'Aperol',                categoria:'Liquori',    formatoMl:700,  prezzoNetto:9.00  },
-  { nome:'Campari',               categoria:'Liquori',    formatoMl:700,  prezzoNetto:11.00 },
-  { nome:'Martini Rosso',         categoria:'Liquori',    formatoMl:1000, prezzoNetto:7.00  },
-  { nome:'Martini Dry',           categoria:'Liquori',    formatoMl:1000, prezzoNetto:7.00  },
-  { nome:'Triple Sec',            categoria:'Liquori',    formatoMl:700,  prezzoNetto:16.00 },
-  { nome:'Liquore al Caffè',      categoria:'Liquori',    formatoMl:700,  prezzoNetto:15.00 },
-  { nome:'Sciroppo di Sambuco',   categoria:'Liquori',    formatoMl:700,  prezzoNetto:10.00 },
-  { nome:'Prosecco',              categoria:'Vini',       formatoMl:750,  prezzoNetto:5.00  },
-  { nome:'Sciroppo di Zucchero',  categoria:'Succhi e Sciroppi', formatoMl:1000, prezzoNetto:4.00  },
-  { nome:'Succo di Lime',         categoria:'Succhi e Sciroppi', formatoMl:1000, prezzoNetto:3.00  },
-  { nome:'Succo di Pompelmo',     categoria:'Succhi e Sciroppi', formatoMl:1000, prezzoNetto:3.00  },
-  { nome:'Soda Water',            categoria:'Sodati', formatoMl:1000, prezzoNetto:1.00  },
-  { nome:'Tonic Water',           categoria:'Sodati', formatoMl:1000, prezzoNetto:2.00  },
-  { nome:'Ginger Beer',           categoria:'Sodati', formatoMl:1000, prezzoNetto:3.00  },
-  { nome:'Cola',                  categoria:'Sodati', formatoMl:1000, prezzoNetto:1.50  },
+  { nome:'Gin London Dry (Beefeater)', categoria:'Distillati', formatoMl:1000, prezzoNetto:14.60, giacenzaMin:4 },
+  { nome:'Vodka (Smirnoff)',          categoria:'Distillati', formatoMl:1000, prezzoNetto:9.89,  giacenzaMin:4 },
+  { nome:'Rum Bianco (Cabo Rojo Carta Plata)', categoria:'Distillati', formatoMl:1000, prezzoNetto:7.54, giacenzaMin:4 },
+  { nome:'Bourbon Whiskey (Bulleit)', categoria:'Distillati', formatoMl:700,  prezzoNetto:16.35, giacenzaMin:4 },
+  { nome:'Rye Whiskey (Bulleit)',     categoria:'Distillati', formatoMl:700,  prezzoNetto:21.27, giacenzaMin:4 },
+  { nome:'Tequila Blanco (Espolon)',  categoria:'Distillati', formatoMl:700,  prezzoNetto:16.86, giacenzaMin:4 },
+  { nome:'Gin Floreale (Hendricks 1886)',   categoria:'Distillati', formatoMl:700, prezzoNetto:27.78, giacenzaMin:4 },
+  { nome:'Gin Agrumato (Etsu Yuzu)',  categoria:'Distillati', formatoMl:700, prezzoNetto:28.73, giacenzaMin:4 },
+  { nome:'Gin Fruttato (Amuerte Red)', categoria:'Distillati', formatoMl:700, prezzoNetto:45.04, giacenzaMin:4 },
+  { nome:'Scotch Whisky Torbato (Lagavulin 8YO)', categoria:'Selezione Distillati', formatoMl:700, prezzoNetto:47.81, giacenzaMin:2 },
+  { nome:'Cognac (Martell VSOP)',     categoria:'Selezione Distillati', formatoMl:700,  prezzoNetto:41.26, giacenzaMin:2 },
+  { nome:'Tequila Añejo (Casamigos)', categoria:'Selezione Distillati', formatoMl:700,  prezzoNetto:43.98, giacenzaMin:2 },
+  { nome:'Mezcal (Del Maguey Vida)',  categoria:'Selezione Distillati', formatoMl:700,  prezzoNetto:35.37, giacenzaMin:2 },
+  { nome:'Vermouth Rosso (Carpano Classico)', categoria:'Liquori', formatoMl:1000, prezzoNetto:10.07, giacenzaMin:4 },
+  { nome:'Vermouth Dry (Carpano)',    categoria:'Liquori',    formatoMl:1000, prezzoNetto:12.94, giacenzaMin:4 },
+  { nome:'Bitter Rosso (Campari)',    categoria:'Liquori',    formatoMl:1000, prezzoNetto:14.00, giacenzaMin:4 },
+  { nome:'Aperol',                    categoria:'Liquori',    formatoMl:1000, prezzoNetto:10.96, giacenzaMin:4 },
+  { nome:'Triple Sec (Giffard)',      categoria:'Liquori',    formatoMl:700,  prezzoNetto:10.99, giacenzaMin:4 },
+  { nome:'Liquore al Caffè (Giffard)', categoria:'Liquori',   formatoMl:700,  prezzoNetto:13.69, giacenzaMin:4 },
+  { nome:'Liquore Fiori di Sambuco (Giffard)', categoria:'Liquori', formatoMl:700, prezzoNetto:16.99, giacenzaMin:4 },
+  { nome:'Aromatic Bitters (Bitter Truth Old Time)', categoria:'Liquori', formatoMl:200, prezzoNetto:14.63, giacenzaMin:4 },
+  { nome:'Prosecco',                  categoria:'Vini',       formatoMl:750,  prezzoNetto:3.00,  giacenzaMin:3 },
+  { nome:'Sciroppo di Zucchero (Giffard Canna)', categoria:'Succhi e Sciroppi', formatoMl:1000, prezzoNetto:8.44, giacenzaMin:2 },
+  { nome:'Succo di Lime',             categoria:'Succhi e Sciroppi', formatoMl:1000, prezzoNetto:3.00,  giacenzaMin:2 },
+  { nome:'Sciroppo Egg White (Giffard)', categoria:'Succhi e Sciroppi', formatoMl:700, prezzoNetto:13.66, giacenzaMin:1 },
+  { nome:'Soda Water (San Bernardo Gas 75cl)', categoria:'Sodati', formatoMl:750, prezzoNetto:0.52, giacenzaMin:2 },
+  { nome:'Acqua Tonica (Fever Tree Indian)', categoria:'Sodati', formatoMl:200, prezzoNetto:0.99, monodose:true, giacenzaMin:96 },
+  { nome:'Ginger Beer (Fever Tree)',  categoria:'Sodati', formatoMl:200, prezzoNetto:0.99, monodose:true, giacenzaMin:48 },
+  { nome:'Cola (Coca Cola)',          categoria:'Sodati', formatoMl:200, prezzoNetto:0.71, monodose:true, giacenzaMin:12 },
+  { nome:'Soda al Pompelmo Rosa (Fever Tree)', categoria:'Sodati', formatoMl:200, prezzoNetto:0.99, monodose:true, giacenzaMin:48 },
 ].map(p => ({ id: uid('p'), fornitore:'Partesa', iva:22, ...p }));
 
 function findProdottoIdByNome(prodotti, nome){
   const p = prodotti.find(x => x.nome === nome);
   return p ? p.id : null;
 }
+function findProdottoIdByNomeCategoria(prodotti, nome, categoria){
+  const p = prodotti.find(x => x.nome === nome && x.categoria === categoria);
+  return p ? p.id : null;
+}
 
-// ---- Drink list precompilata: ingredienti riferiti per nome prodotto (risolti in id al setup) ----
+// ---- Drink list precompilata: dosi esatte dal Ricettario Hotel Cocktail System ----
 function buildDefaultCocktail(prodotti){
   const pid = (nome) => findProdottoIdByNome(prodotti, nome);
   const P = (nome, ml) => ({ tipo:'prodotto', prodottoId: pid(nome), ml });
   const C = (nome, costo) => ({ tipo:'custom', nome, costo });
 
   const list = [
-    { nome:'Aperol Spritz', prezzoVendita:10, ingredienti:[ P('Prosecco',90), P('Aperol',60), P('Soda Water',30) ] },
-    { nome:'Hugo Spritz', prezzoVendita:10, ingredienti:[ P('Prosecco',100), P('Sciroppo di Sambuco',20), P('Soda Water',30), C('Menta fresca',0.15) ] },
-    { nome:'Americano', prezzoVendita:10, ingredienti:[ P('Campari',30), P('Martini Rosso',30), P('Soda Water',30) ] },
-    { nome:'Negroni', prezzoVendita:10, ingredienti:[ P('Gin London Dry',30), P('Campari',30), P('Martini Rosso',30) ] },
-    { nome:'Negroni Sbagliato', prezzoVendita:10, ingredienti:[ P('Prosecco',30), P('Campari',30), P('Martini Rosso',30) ] },
-    { nome:'Boulevardier', prezzoVendita:10, ingredienti:[ P('Whisky Blended',30), P('Campari',30), P('Martini Rosso',30) ] },
-    { nome:'Manhattan', prezzoVendita:10, ingredienti:[ P('Whisky Blended',50), P('Martini Rosso',20), C('Angostura (dash)',0.10) ] },
-    { nome:'Martini Cocktail', prezzoVendita:10, ingredienti:[ P('Gin London Dry',60), P('Martini Dry',10) ] },
-    { nome:'Cuba Libre', prezzoVendita:10, ingredienti:[ P('Rum Bianco',45), P('Cola',120), C('Lime',0.10) ] },
-    { nome:'Daiquiri', prezzoVendita:10, ingredienti:[ P('Rum Bianco',45), P('Succo di Lime',25), P('Sciroppo di Zucchero',15) ] },
-    { nome:'Mojito', prezzoVendita:10, ingredienti:[ P('Rum Bianco',45), P('Succo di Lime',25), P('Sciroppo di Zucchero',15), P('Soda Water',30), C('Menta fresca',0.15) ] },
-    { nome:'Margarita', prezzoVendita:10, ingredienti:[ P('Tequila Blanco',45), P('Triple Sec',20), P('Succo di Lime',20) ] },
-    { nome:'Paloma', prezzoVendita:10, ingredienti:[ P('Tequila Blanco',45), P('Succo di Pompelmo',90), P('Succo di Lime',10), C('Sale (bordo)',0.05) ] },
-    { nome:'Whiskey Sour', prezzoVendita:10, ingredienti:[ P('Whisky Blended',45), P('Succo di Lime',25), P('Sciroppo di Zucchero',15) ] },
-    { nome:'Old Fashioned', prezzoVendita:10, ingredienti:[ P('Whisky Blended',60), P('Sciroppo di Zucchero',5), C('Angostura (dash)',0.10) ] },
-    { nome:'Moscow Mule', prezzoVendita:10, ingredienti:[ P('Vodka',45), P('Ginger Beer',120), P('Succo di Lime',10) ] },
-    { nome:'Espresso Martini', prezzoVendita:10, ingredienti:[ P('Vodka',40), P('Liquore al Caffè',20), P('Sciroppo di Zucchero',10), C('Caffè espresso',0.25) ] },
-    { nome:'Gin Tonic', prezzoVendita:10, ingredienti:[ P('Gin London Dry',50), P('Tonic Water',150) ] },
+    { nome:'Americano', prezzoVendita:10, ingredienti:[ P('Bitter Rosso (Campari)',30), P('Vermouth Rosso (Carpano Classico)',30), P('Soda Water (San Bernardo Gas 75cl)',30) ] },
+    { nome:'Boulevardier', prezzoVendita:10, ingredienti:[ P('Bourbon Whiskey (Bulleit)',30), P('Bitter Rosso (Campari)',30), P('Vermouth Rosso (Carpano Classico)',30) ] },
+    { nome:'Cuba Libre', prezzoVendita:10, ingredienti:[ P('Rum Bianco (Cabo Rojo Carta Plata)',50), P('Cola (Coca Cola)',200), C('Lime (spicchio spremuto)',0.10) ] },
+    { nome:'Daiquiri', prezzoVendita:10, ingredienti:[ P('Rum Bianco (Cabo Rojo Carta Plata)',50), P('Succo di Lime',22.5), P('Sciroppo di Zucchero (Giffard Canna)',15) ] },
+    { nome:'Dry Martini', prezzoVendita:10, ingredienti:[ P('Gin London Dry (Beefeater)',60), P('Vermouth Dry (Carpano)',15) ] },
+    { nome:'Espresso Martini', prezzoVendita:10, ingredienti:[ P('Vodka (Smirnoff)',50), C('Caffè espresso',0.25), P('Liquore al Caffè (Giffard)',15), P('Sciroppo di Zucchero (Giffard Canna)',15) ] },
+    { nome:'Gin Tonic — London Dry', prezzoVendita:10, ingredienti:[ P('Gin London Dry (Beefeater)',50), P('Acqua Tonica (Fever Tree Indian)',200) ] },
+    { nome:'Gin Tonic — Floreale', prezzoVendita:10, ingredienti:[ P('Gin Floreale (Hendricks 1886)',50), P('Acqua Tonica (Fever Tree Indian)',200) ] },
+    { nome:'Gin Tonic — Agrumato', prezzoVendita:10, ingredienti:[ P('Gin Agrumato (Etsu Yuzu)',50), P('Acqua Tonica (Fever Tree Indian)',200) ] },
+    { nome:'Gin Tonic — Fruttato', prezzoVendita:10, ingredienti:[ P('Gin Fruttato (Amuerte Red)',50), P('Acqua Tonica (Fever Tree Indian)',200) ] },
+    { nome:'Hugo Spritz', prezzoVendita:10, ingredienti:[ P('Prosecco',90), P('Liquore Fiori di Sambuco (Giffard)',60), P('Soda Water (San Bernardo Gas 75cl)',30), C('Menta + lime (garnish)',0.15) ] },
+    { nome:'Manhattan', prezzoVendita:10, ingredienti:[ P('Rye Whiskey (Bulleit)',50), P('Vermouth Rosso (Carpano Classico)',22.5), P('Aromatic Bitters (Bitter Truth Old Time)',2) ] },
+    { nome:'Margarita', prezzoVendita:10, ingredienti:[ P('Tequila Blanco (Espolon)',50), P('Triple Sec (Giffard)',22.5), P('Succo di Lime',15), C('Crusta di sale',0.05) ] },
+    { nome:'Mojito Cubano', prezzoVendita:10, ingredienti:[ P('Rum Bianco (Cabo Rojo Carta Plata)',50), P('Succo di Lime',22.5), P('Sciroppo di Zucchero (Giffard Canna)',15), C('Menta (4 ciuffetti, ~0,05€/ciuffetto)',0.20), P('Soda Water (San Bernardo Gas 75cl)',30) ] },
+    { nome:'Moscow Mule', prezzoVendita:10, ingredienti:[ P('Vodka (Smirnoff)',50), P('Succo di Lime',15), P('Ginger Beer (Fever Tree)',120) ] },
+    { nome:'Negroni', prezzoVendita:10, ingredienti:[ P('Gin London Dry (Beefeater)',30), P('Vermouth Rosso (Carpano Classico)',30), P('Bitter Rosso (Campari)',30) ] },
+    { nome:'Negroni Sbagliato', prezzoVendita:10, ingredienti:[ P('Vermouth Rosso (Carpano Classico)',30), P('Bitter Rosso (Campari)',30), P('Prosecco',30) ] },
+    { nome:'Old Fashioned', prezzoVendita:10, ingredienti:[ P('Bourbon Whiskey (Bulleit)',50), P('Sciroppo di Zucchero (Giffard Canna)',7.5), P('Aromatic Bitters (Bitter Truth Old Time)',2) ] },
+    { nome:'Paloma', prezzoVendita:10, ingredienti:[ P('Tequila Blanco (Espolon)',50), P('Succo di Lime',15), P('Soda al Pompelmo Rosa (Fever Tree)',120) ] },
+    { nome:'Spritz', prezzoVendita:10, ingredienti:[ P('Prosecco',90), P('Bitter Rosso (Campari)',60), P('Soda Water (San Bernardo Gas 75cl)',30) ] },
+    { nome:'Whiskey Sour', prezzoVendita:10, ingredienti:[ P('Bourbon Whiskey (Bulleit)',50), P('Succo di Lime',22.5), P('Sciroppo di Zucchero (Giffard Canna)',15), P('Aromatic Bitters (Bitter Truth Old Time)',2), P('Sciroppo Egg White (Giffard)',15) ] },
   ];
-  return list.map(c => ({ id: uid('c'), tipo:'cocktail', ...c }));
+  const SELEZIONATI_DEFAULT = new Set([
+    'Negroni','Spritz','Americano','Old Fashioned','Manhattan','Whiskey Sour',
+    'Moscow Mule','Mojito Cubano','Espresso Martini',
+    'Gin Tonic — London Dry','Gin Tonic — Floreale','Gin Tonic — Agrumato','Gin Tonic — Fruttato',
+  ]);
+
+  return list.map(c => ({ id: uid('c'), tipo:'cocktail', selezionato: SELEZIONATI_DEFAULT.has(c.nome), ...c }));
 }
 
 // ---- Distillati serviti singoli (1 ingrediente, dose standard 50ml) ----
 function buildDefaultDistillati(prodotti){
   const pid = (nome) => findProdottoIdByNome(prodotti, nome);
-  const spirits = ['Gin London Dry','Vodka','Rum Bianco','Rum Ambrato','Whisky Blended','Tequila Blanco','Cognac VS'];
+  const spirits = ['Bourbon Whiskey (Bulleit)','Scotch Whisky Torbato (Lagavulin 8YO)','Cognac (Martell VSOP)','Tequila Añejo (Casamigos)','Mezcal (Del Maguey Vida)'];
   return spirits.map(nome => ({
     id: uid('d'),
     tipo: 'distillato',
     nome: nome,
     prezzoVendita: 10,
+    selezionato: true,
     ingredienti: [ { tipo:'prodotto', prodottoId: pid(nome), ml: 50 } ]
   }));
 }
@@ -866,7 +929,7 @@ const DEFAULT_HOTEL = {
 function creaStatoIniziale(){
   const prodotti = DEFAULT_PRODOTTI.map(p => ({...p}));
   const cocktail = [...buildDefaultCocktail(prodotti), ...buildDefaultDistillati(prodotti)];
-  return { hotel: {...DEFAULT_HOTEL}, prodotti, cocktail };
+  return { hotel: {...DEFAULT_HOTEL}, prodotti, cocktail, giacenzeAttuali: {} };
 }
 
 // ---- Calcoli ----
@@ -879,6 +942,13 @@ function costoIngrediente(ing, prodotti){
   if(ing.tipo === 'custom') return ing.costo || 0;
   const p = prodotti.find(x => x.id === ing.prodottoId);
   if(!p) return 0;
+  // I prodotti in categoria "Sodati" (bibite/toniche in bottiglietta monodose) vengono
+  // sempre conteggiati a bottiglietta intera: una volta aperta, il residuo va buttato
+  // per non rischiare di riutilizzarlo su un drink diverso.
+  // Le bibite Fever Tree monodose (bottiglietta piccola, va buttata una volta aperta)
+  // si conteggiano sempre a bottiglietta intera. La Soda Water invece è una bottiglia
+  // grande condivisa su più drink nella giornata di servizio: si conteggia proporzionale al ml.
+  if(p.categoria === 'Sodati' && p.monodose) return p.prezzoNetto || 0;
   return costoMlProdotto(p) * (ing.ml || 0);
 }
 
@@ -907,6 +977,7 @@ function labelStato(stato){
 
 const STORAGE_KEY = 'hcs_manager_state_v5';
 let STATE = loadState();
+STATE.giacenzeAttuali = STATE.giacenzeAttuali || {};
 let editingProdottoId = null;
 let openDrinkId = null;
 
@@ -946,6 +1017,7 @@ function switchTab(tab){
   if(tab==='prodotti') renderProdotti();
   if(tab==='cocktail') renderCocktail();
   if(tab==='report') renderReport();
+  if(tab==='giacenze') renderGiacenze();
 }
 
 // ================= PRODOTTI =================
@@ -1002,6 +1074,7 @@ function openProdottoModal(id){
   document.getElementById('pm-prezzo').value = p.prezzoNetto;
   document.getElementById('pm-iva').value = p.iva;
   document.getElementById('pm-fornitore').value = p.fornitore||'';
+  document.getElementById('pm-giacenza').value = p.giacenzaMin != null ? p.giacenzaMin : 1;
   document.getElementById('pm-delete').style.display = id ? 'inline-flex' : 'none';
   openModal('modal-prodotto');
 }
@@ -1025,6 +1098,7 @@ function salvaProdotto(){
     prezzoNetto: parseFloat(document.getElementById('pm-prezzo').value) || 0,
     iva: parseFloat(document.getElementById('pm-iva').value) || 0,
     fornitore: document.getElementById('pm-fornitore').value.trim(),
+    giacenzaMin: parseFloat(document.getElementById('pm-giacenza').value) || 0,
   };
   if(editingProdottoId){
     const p = STATE.prodotti.find(x=>x.id===editingProdottoId);
@@ -1035,6 +1109,24 @@ function salvaProdotto(){
   saveState();
   closeModal('modal-prodotto');
   renderProdotti(document.getElementById('prodotti-search').value);
+}
+
+function ripristinaProdottiBase(){
+  if(!confirm('ATTENZIONE: se hai modificato a mano il prezzo o altri dati di un prodotto standard (es. Campari, Aperol...) senza cambiargli nome, quella modifica verrà persa e tornerà al valore di listino Partesa. I prodotti con nome diverso da quelli standard, e le giacenze attuali, restano intatti. Vuoi procedere?')) return;
+  const nomiBase = new Set(DEFAULT_PRODOTTI.map(p=>p.nome));
+  const prodottiExtra = STATE.prodotti.filter(p => !nomiBase.has(p.nome));
+  const prodottiFreschi = DEFAULT_PRODOTTI.map(p => ({...p, id: uid('p')}));
+  const tuttiProdotti = [...prodottiFreschi, ...prodottiExtra];
+
+  const cocktailBase = [...buildDefaultCocktail(tuttiProdotti), ...buildDefaultDistillati(tuttiProdotti)];
+  const nomiCocktailBase = new Set(cocktailBase.map(c=>c.nome));
+  const cocktailExtra = STATE.cocktail.filter(c => !nomiCocktailBase.has(c.nome));
+
+  STATE.prodotti = tuttiProdotti;
+  STATE.cocktail = [...cocktailBase, ...cocktailExtra];
+  saveState();
+  renderProdotti(document.getElementById('prodotti-search').value);
+  alert('Prodotti e drink list di base aggiornati.');
 }
 
 function eliminaProdotto(){
@@ -1048,6 +1140,120 @@ function eliminaProdotto(){
   saveState();
   closeModal('modal-prodotto');
   renderProdotti(document.getElementById('prodotti-search').value);
+}
+
+// ================= GIACENZE / ORDINE =================
+function prodottiUsatiDaSelezionati(){
+  const idsUsati = new Set();
+  STATE.cocktail.filter(c => c.selezionato).forEach(c=>{
+    (c.ingredienti||[]).forEach(ing=>{
+      if(ing.tipo==='prodotto' && ing.prodottoId) idsUsati.add(ing.prodottoId);
+    });
+  });
+  return STATE.prodotti
+    .filter(p => idsUsati.has(p.id))
+    .sort((a,b)=> (a.categoria||'').localeCompare(b.categoria||'') || a.nome.localeCompare(b.nome));
+}
+
+function renderGiacenze(){
+  const wrap = document.getElementById('giacenze-list');
+  const prodotti = prodottiUsatiDaSelezionati();
+  if(prodotti.length===0){
+    wrap.innerHTML = `<div class="placeholder">${ICONS.box}<h3>Nessun prodotto</h3><p>Seleziona almeno un drink o distillato (flag ✓) in Drink List per popolare l'ordine.</p></div>`;
+    return;
+  }
+  wrap.innerHTML = prodotti.map(p=>{
+    const min = p.giacenzaMin != null ? p.giacenzaMin : 1;
+    const attuale = STATE.giacenzeAttuali[p.id] != null ? STATE.giacenzeAttuali[p.id] : 0;
+    const daOrdinare = Math.max(0, min - attuale);
+    const perCartone = p.monodose ? 24 : null;
+    const cartoniNote = perCartone ? `<div class="giac-cartoni">1 cartone = ${perCartone} pz · min. ${Math.round(min/perCartone)} cartoni</div>` : '';
+    const cartoniOrdina = perCartone && daOrdinare>0 ? ` (${Math.ceil(daOrdinare/perCartone)} cartoni)` : '';
+    return `<div class="giac-row" data-id="${p.id}">
+      <div class="giac-name">
+        <div class="gn">${escapeHtml(p.nome)}</div>
+        <span class="cat-pill">${escapeHtml(p.categoria||'—')}</span>
+        ${cartoniNote}
+      </div>
+      <div class="giac-figures">
+        <div class="giac-top">
+          <div class="giac-col"><span class="lbl">Minima</span>${min}</div>
+          <div class="giac-col"><span class="lbl">Attuale</span><input type="number" min="0" step="1" value="${attuale}" onchange="setGiacenzaAttuale('${p.id}', this.value)"></div>
+        </div>
+        <div class="giac-ordina" id="ordina-${p.id}"><span class="lbl">Da ordinare</span><span class="ord-num">${daOrdinare}</span><span class="ord-cartoni">${cartoniOrdina}</span></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function setGiacenzaAttuale(prodottoId, val){
+  const n = Math.max(0, parseFloat(val)||0);
+  STATE.giacenzeAttuali[prodottoId] = n;
+  saveState();
+  const p = STATE.prodotti.find(x=>x.id===prodottoId);
+  const min = p && p.giacenzaMin != null ? p.giacenzaMin : 1;
+  const daOrdinare = Math.max(0, min - n);
+  const perCartone = p && p.monodose ? 24 : null;
+  const cartoniOrdina = perCartone && daOrdinare>0 ? ` (${Math.ceil(daOrdinare/perCartone)} cartoni)` : '';
+  const cell = document.getElementById('ordina-'+prodottoId);
+  if(cell) cell.innerHTML = `<span class="lbl">Da ordinare</span><span class="ord-num">${daOrdinare}</span><span class="ord-cartoni">${cartoniOrdina}</span>`;
+}
+
+function esportaOrdinePDF(modo){
+  modo = modo || 'personalizzato';
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'pt', format:'a4' });
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const marginX = 40;
+  const dark = [31,31,31];
+  const grey = [110,110,110];
+
+  const titolo = modo === 'completo' ? 'Ordine Completo — Start Servizio' : 'Ordine Personalizzato';
+
+  doc.setFillColor(...dark);
+  doc.rect(0,0,pageW,64,'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold'); doc.setFontSize(15);
+  doc.text(titolo, marginX, 30);
+  doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  doc.setTextColor(200,200,200);
+  doc.text(STATE.hotel.nome || 'Hotel', marginX, 46);
+
+  let y = 100;
+  doc.setTextColor(...dark); doc.setFont('helvetica','bold'); doc.setFontSize(9);
+  doc.text('Prodotto', marginX, y);
+  doc.text('Quantità da ordinare', pageW - marginX, y, { align:'right' });
+  y += 8;
+  doc.setDrawColor(230,230,230); doc.line(marginX, y, pageW-marginX, y);
+  y += 18;
+
+  const prodotti = prodottiUsatiDaSelezionati();
+  const daOrdinare = prodotti.map(p=>{
+    const min = p.giacenzaMin != null ? p.giacenzaMin : 1;
+    const qty = modo === 'completo' ? min : Math.max(0, min - (STATE.giacenzeAttuali[p.id] != null ? STATE.giacenzeAttuali[p.id] : 0));
+    const label = (p.monodose && qty > 0) ? `${qty} pz (${Math.ceil(qty/24)} cartoni da 24)` : String(qty);
+    return { nome: p.nome, qty, label };
+  }).filter(x => x.qty > 0);
+
+  if(daOrdinare.length === 0){
+    doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(...grey);
+    doc.text('Nessun prodotto sotto la giacenza minima al momento.', marginX, y);
+  } else {
+    doc.setFont('helvetica','normal'); doc.setFontSize(10);
+    daOrdinare.forEach(x=>{
+      if(y > pageH - 60){ doc.addPage(); y = 60; }
+      doc.setTextColor(...dark);
+      doc.text(String(x.nome), marginX, y);
+      doc.text(x.label, pageW - marginX, y, { align:'right' });
+      y += 18;
+    });
+  }
+
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...grey);
+  doc.text('HCS Manager by Daniel Sportelli', marginX, pageH - 24);
+
+  doc.save(modo === 'completo' ? 'ordine-completo-start-servizio.pdf' : 'ordine-personalizzato.pdf');
 }
 
 // ================= COCKTAIL =================
@@ -1077,14 +1283,21 @@ function renderDrinkCard(c){
   return `
     <div class="drink-card ${open?'open':''}" data-id="${c.id}">
       <div class="drink-row" onclick="toggleDrink('${c.id}')">
-        ${ICONS.chev}
-        <div class="dn">${escapeHtml(c.nome)}</div>
-        <div class="dcost"><span class="lbl">Drink Cost<br>IVA escl.</span>${fmtMoney(costo)}</div>
-        <div class="dprice" onclick="event.stopPropagation()">
-          <span class="lbl">Prezzo Vendita<br>IVA incl.</span>
-          <input type="number" step="0.5" value="${c.prezzoVendita}" onchange="setPrezzoVendita('${c.id}', this.value)">
+        <div class="dr-top">
+          <label class="sel-check" onclick="event.stopPropagation()">
+            <input type="checkbox" ${c.selezionato?'checked':''} onchange="toggleSelezionato('${c.id}', this.checked)">
+          </label>
+          ${ICONS.chev}
+          <div class="dn">${escapeHtml(c.nome)}</div>
+          <span class="badge ${stato}">${labelStato(stato)}</span>
         </div>
-        <span class="badge ${stato}">${labelStato(stato)}</span>
+        <div class="dr-bottom">
+          <div class="dcost"><span class="lbl">Drink Cost<br>IVA escl.</span>${fmtMoney(costo)}</div>
+          <div class="dprice" onclick="event.stopPropagation()">
+            <span class="lbl">Prezzo Vendita<br>IVA incl.</span>
+            <input type="number" step="0.5" value="${c.prezzoVendita}" onchange="setPrezzoVendita('${c.id}', this.value)">
+          </div>
+        </div>
       </div>
       <div class="drink-body">${renderDrinkBody(c)}</div>
     </div>`;
@@ -1144,6 +1357,12 @@ function showAddIng(id){
 
 function toggleDrink(id){
   openDrinkId = openDrinkId===id ? null : id;
+  renderCocktail(document.getElementById('cocktail-search').value);
+}
+function toggleSelezionato(id, checked){
+  const c = STATE.cocktail.find(x=>x.id===id);
+  c.selezionato = !!checked;
+  saveState();
   renderCocktail(document.getElementById('cocktail-search').value);
 }
 function setPrezzoVendita(id, val){
@@ -1237,24 +1456,38 @@ function renderReport(){
       Gli stati indicano il posizionamento del Beverage Cost % rispetto alla soglia impostata (${STATE.hotel.sogliaMin}%–${STATE.hotel.sogliaMax}%): non sono un errore da correggere, solo un riferimento — puoi comunque scegliere di alzare o abbassare il prezzo.
     </p>`;
 
-  const rowsHtml = calcolati
-    .sort((a,b)=> a.c.nome.localeCompare(b.c.nome))
-    .map(({c,r})=>{
-      const stato = statoDaPct(r.pct, STATE.hotel);
-      return `<div class="report-row" onclick="apriDaReport('${c.id}')">
+  const rigaReport = ({c,r}) => {
+    const stato = statoDaPct(r.pct, STATE.hotel);
+    return `<div class="report-row" onclick="apriDaReport('${c.id}')">
+      <div class="rr-top">
         <div class="rn">${escapeHtml(c.nome)}</div>
-        <div class="rv"><span class="lbl">Drink Cost<br>IVA escl.</span>${fmtMoney(r.costo)}</div>
-        <div class="rv"><span class="lbl">Prezzo<br>IVA escl.</span>${fmtMoney(r.prezzoNetto)}</div>
-        <div class="rv"><span class="lbl">Prezzo<br>IVA incl.</span>${fmtMoney(c.prezzoVendita)}</div>
-        <div class="rv"><span class="lbl">Bev.<br>Cost</span>${fmtPct(r.pct)}</div>
         <span class="badge ${stato}">${labelStato(stato)}</span>
-      </div>`;
-    }).join('');
+      </div>
+      <div class="rr-vals">
+        <div class="rv"><span class="lbl">Prezzo Acquisto<br>IVA escl.</span>${fmtMoney(r.costo)}</div>
+        <div class="rv"><span class="lbl">Prezzo Vendita<br>IVA escl.</span>${fmtMoney(r.prezzoNetto)}</div>
+        <div class="rv"><span class="lbl">Prezzo Vendita<br>IVA incl.</span>${fmtMoney(c.prezzoVendita)}</div>
+        <div class="rv"><span class="lbl">Beverage<br>Cost</span>${fmtPct(r.pct)}</div>
+      </div>
+    </div>`;
+  };
+
+  const cocktailRowsHtml = calcolati
+    .filter(x => x.c.tipo !== 'distillato')
+    .sort((a,b)=> a.c.nome.localeCompare(b.c.nome))
+    .map(rigaReport).join('');
+
+  const distillatiRowsHtml = calcolati
+    .filter(x => x.c.tipo === 'distillato')
+    .sort((a,b)=> a.c.nome.localeCompare(b.c.nome))
+    .map(rigaReport).join('');
 
   view.innerHTML = `
     ${kpiHtml}
-    <div class="section-title" style="font-size:13px;margin-bottom:8px;">Tutti i cocktail</div>
-    <div>${rowsHtml || '<p style="color:var(--txt2);font-size:12px;">Nessun drink in elenco.</p>'}</div>
+    <div class="section-title" style="font-size:13px;margin-bottom:8px;">Drink List</div>
+    <div>${cocktailRowsHtml || '<p style="color:var(--txt2);font-size:12px;">Nessun drink in elenco.</p>'}</div>
+    <div class="section-title" style="font-size:13px;margin:20px 0 8px;">Selezione Distillati</div>
+    <div>${distillatiRowsHtml || '<p style="color:var(--txt2);font-size:12px;">Nessun distillato in elenco.</p>'}</div>
   `;
 }
 
@@ -1297,6 +1530,7 @@ function caricaProgetto(event){
       const nuovoStato = parsed.stato || parsed; // tollera anche un JSON "grezzo"
       if(!nuovoStato.prodotti || !nuovoStato.cocktail || !nuovoStato.hotel) throw new Error('Formato non riconosciuto');
       STATE = nuovoStato;
+      STATE.giacenzeAttuali = STATE.giacenzeAttuali || {};
       saveState();
       alert('Progetto ripristinato correttamente.');
       document.getElementById('hotel-name-header').textContent = STATE.hotel.nome || '';
