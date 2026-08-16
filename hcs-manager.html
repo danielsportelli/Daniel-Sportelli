@@ -1202,58 +1202,68 @@ function setGiacenzaAttuale(prodottoId, val){
 function esportaOrdinePDF(modo){
   modo = modo || 'personalizzato';
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ unit:'pt', format:'a4' });
-  const pageW = doc.internal.pageSize.getWidth();
-  const pageH = doc.internal.pageSize.getHeight();
-  const marginX = 40;
   const dark = [31,31,31];
   const grey = [110,110,110];
 
-  const titolo = modo === 'completo' ? 'Ordine Completo — Start Servizio' : 'Ordine Personalizzato';
-
-  doc.setFillColor(...dark);
-  doc.rect(0,0,pageW,64,'F');
-  doc.setTextColor(255,255,255);
-  doc.setFont('helvetica','bold'); doc.setFontSize(15);
-  doc.text(titolo, marginX, 30);
-  doc.setFont('helvetica','normal'); doc.setFontSize(9);
-  doc.setTextColor(200,200,200);
-  doc.text(STATE.hotel.nome || 'Hotel', marginX, 46);
-
-  let y = 100;
-  doc.setTextColor(...dark); doc.setFont('helvetica','bold'); doc.setFontSize(9);
-  doc.text('Prodotto', marginX, y);
-  doc.text('Quantità da ordinare', pageW - marginX, y, { align:'right' });
-  y += 8;
-  doc.setDrawColor(230,230,230); doc.line(marginX, y, pageW-marginX, y);
-  y += 18;
-
   const prodotti = prodottiUsatiDaSelezionati();
-  const daOrdinare = prodotti.map(p=>{
+  const daOrdinareTutti = prodotti.map(p=>{
     const min = p.giacenzaMin != null ? p.giacenzaMin : 1;
     const qty = modo === 'completo' ? min : Math.max(0, min - (STATE.giacenzeAttuali[p.id] != null ? STATE.giacenzeAttuali[p.id] : 0));
     const label = (p.monodose && qty > 0) ? `${qty} pz (${Math.ceil(qty/24)} cartoni da 24)` : String(qty);
-    return { nome: p.nome, qty, label };
+    return { nome: p.nome, qty, label, fornitore: (p.fornitore || 'Fornitore non specificato').trim() };
   }).filter(x => x.qty > 0);
 
-  if(daOrdinare.length === 0){
-    doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(...grey);
-    doc.text('Nessun prodotto sotto la giacenza minima al momento.', marginX, y);
-  } else {
+  if(daOrdinareTutti.length === 0){
+    alert('Nessun prodotto sotto la giacenza minima al momento: nessun PDF da generare.');
+    return;
+  }
+
+  // Raggruppa per fornitore: un PDF distinto per ciascuno, anche con un solo articolo
+  const gruppi = {};
+  daOrdinareTutti.forEach(x=>{
+    if(!gruppi[x.fornitore]) gruppi[x.fornitore] = [];
+    gruppi[x.fornitore].push(x);
+  });
+
+  Object.keys(gruppi).sort().forEach(fornitore=>{
+    const doc = new jsPDF({ unit:'pt', format:'a4' });
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const marginX = 40;
+    const titolo = 'Ordine ' + fornitore;
+
+    doc.setFillColor(...dark);
+    doc.rect(0,0,pageW,64,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFont('helvetica','bold'); doc.setFontSize(15);
+    doc.text(titolo, marginX, 30);
+    doc.setFont('helvetica','normal'); doc.setFontSize(9);
+    doc.setTextColor(200,200,200);
+    doc.text(STATE.hotel.nome || 'Hotel', marginX, 46);
+
+    let y = 100;
+    doc.setTextColor(...dark); doc.setFont('helvetica','bold'); doc.setFontSize(9);
+    doc.text('Prodotto', marginX, y);
+    doc.text('Quantità da ordinare', pageW - marginX, y, { align:'right' });
+    y += 8;
+    doc.setDrawColor(230,230,230); doc.line(marginX, y, pageW-marginX, y);
+    y += 18;
+
     doc.setFont('helvetica','normal'); doc.setFontSize(10);
-    daOrdinare.forEach(x=>{
+    gruppi[fornitore].forEach(x=>{
       if(y > pageH - 60){ doc.addPage(); y = 60; }
       doc.setTextColor(...dark);
       doc.text(String(x.nome), marginX, y);
       doc.text(x.label, pageW - marginX, y, { align:'right' });
       y += 18;
     });
-  }
 
-  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...grey);
-  doc.text('HCS Manager by Daniel Sportelli', marginX, pageH - 24);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...grey);
+    doc.text('HCS Manager by Daniel Sportelli', marginX, pageH - 24);
 
-  doc.save(modo === 'completo' ? 'ordine-completo-start-servizio.pdf' : 'ordine-personalizzato.pdf');
+    const slugFornitore = fornitore.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+    doc.save('ordine-' + slugFornitore + '.pdf');
+  });
 }
 
 // ================= COCKTAIL =================
@@ -1576,16 +1586,17 @@ function esportaPdf(){
 
   // ---- PAGINA PRODOTTI ----
   let y = intestazione('Situazione Prodotti');
-  doc.setTextColor(...dark); doc.setFont('helvetica','bold'); doc.setFontSize(9);
-  const colsP = [marginX, 185, 250, 310, 400, 480];
-  ['Prodotto','Categoria','Formato','Prezzo Netto','Tot. IVA inclusa','Fornitore'].forEach((h,i)=> doc.text(h, colsP[i], y));
-  y += 8; riga(y); y += 14;
-  doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+  doc.setTextColor(...dark); doc.setFont('helvetica','bold'); doc.setFontSize(8.5);
+  const colsP = [marginX, 165, 262, 322, 392, 472];
+  const headersP = [['Prodotto'], ['Categoria'], ['Formato'], ['Prezzo','Netto'], ['Totale','IVA incl.'], ['Fornitore']];
+  headersP.forEach((lines,i)=> lines.forEach((line,li)=> doc.text(line, colsP[i], y + li*9)));
+  y += 20; riga(y); y += 14;
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.2);
   [...STATE.prodotti].sort((a,b)=>a.nome.localeCompare(b.nome)).forEach(p=>{
-    if(y > pageH - 60){ piePagina(); doc.addPage(); y = intestazione('Situazione Prodotti (segue)'); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); }
+    if(y > pageH - 60){ piePagina(); doc.addPage(); y = intestazione('Situazione Prodotti (segue)'); doc.setFont('helvetica','normal'); doc.setFontSize(8.2); }
     const prezzoLordo = p.prezzoNetto * (1 + (p.iva||0)/100);
     doc.setTextColor(...dark);
-    doc.text(String(p.nome).slice(0,24), colsP[0], y);
+    doc.text(String(p.nome).slice(0,20), colsP[0], y);
     doc.setTextColor(...grey);
     doc.text(String(p.categoria||''), colsP[1], y);
     doc.text(p.formatoMl + ' ml', colsP[2], y);
@@ -1637,25 +1648,39 @@ function esportaPdf(){
 
   doc.setTextColor(...dark); doc.setFont('helvetica','bold'); doc.setFontSize(9);
   const colsD = [marginX, 230, 320, 410, 480];
-  ['Drink','Drink Cost','Prezzo di Vendita','Bev. Cost %','Stato'].forEach((h,i)=> doc.text(h, colsD[i], y));
-  y += 8; riga(y); y += 14;
-  doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
-  calcolati.sort((a,b)=>a.c.nome.localeCompare(b.c.nome)).forEach(({c,r})=>{
-    if(y > pageH - 70){ piePagina(); doc.addPage(); y = intestazione('Drink List — Report (segue)'); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); }
-    const stato = statoDaPct(r.pct, STATE.hotel);
-    const colStato = stato==='green' ? [30,142,90] : stato==='yellow' ? [184,134,11] : [196,61,61];
-    doc.setTextColor(...dark);
-    doc.text(String(c.nome).slice(0,28), colsD[0], y);
-    doc.setTextColor(...grey);
-    doc.text(fmtMoney(r.costo), colsD[1], y);
-    doc.text(fmtMoney(r.prezzoNetto), colsD[2], y);
-    doc.text(fmtPct(r.pct), colsD[3], y);
-    doc.setTextColor(...colStato); doc.setFont('helvetica','bold');
-    doc.text(labelStato(stato), colsD[4], y);
-    doc.setFont('helvetica','normal');
+
+  function tabellaDrink(lista, titoloSezione){
+    if(y > pageH - 90){ piePagina(); doc.addPage(); y = intestazione('Drink List — Report (segue)'); }
+    doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...gold);
+    doc.text(titoloSezione, marginX, y);
     y += 16;
-  });
-  y += 10;
+    doc.setTextColor(...dark); doc.setFont('helvetica','bold'); doc.setFontSize(9);
+    ['Drink','Drink Cost','Prezzo di Vendita','Bev. Cost %','Stato'].forEach((h,i)=> doc.text(h, colsD[i], y));
+    y += 8; riga(y); y += 14;
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+    lista.sort((a,b)=>a.c.nome.localeCompare(b.c.nome)).forEach(({c,r})=>{
+      if(y > pageH - 70){ piePagina(); doc.addPage(); y = intestazione('Drink List — Report (segue)'); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); }
+      const stato = statoDaPct(r.pct, STATE.hotel);
+      const colStato = stato==='green' ? [30,142,90] : stato==='yellow' ? [184,134,11] : [196,61,61];
+      doc.setTextColor(...dark);
+      doc.text(String(c.nome).slice(0,28), colsD[0], y);
+      doc.setTextColor(...grey);
+      doc.text(fmtMoney(r.costo), colsD[1], y);
+      doc.text(fmtMoney(r.prezzoNetto), colsD[2], y);
+      doc.text(fmtPct(r.pct), colsD[3], y);
+      doc.setTextColor(...colStato); doc.setFont('helvetica','bold');
+      doc.text(labelStato(stato), colsD[4], y);
+      doc.setFont('helvetica','normal');
+      y += 16;
+    });
+    y += 14;
+  }
+
+  const calcCocktail = calcolati.filter(x => x.c.tipo !== 'distillato');
+  const calcDistillati = calcolati.filter(x => x.c.tipo === 'distillato');
+  tabellaDrink(calcCocktail, 'Drink List');
+  tabellaDrink(calcDistillati, 'Selezione Distillati');
+
   if(y > pageH - 40){ piePagina(); doc.addPage(); y = intestazione('Drink List — Report (segue)'); }
   doc.setFont('helvetica','italic'); doc.setFontSize(7.5); doc.setTextColor(...grey);
   doc.text('I prezzi in questa sezione sono espressi IVA esclusa.', marginX, y);
