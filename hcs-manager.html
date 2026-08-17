@@ -388,7 +388,11 @@ input[type="file"]{ display:none; }
       <div class="field"><label>Prezzo netto (IVA escl.)</label><input id="pm-prezzo" type="number" step="0.01"></div>
       <div class="field"><label>IVA %</label><input id="pm-iva" type="number"></div>
     </div>
-    <div class="field"><label>Fornitore (facoltativo)</label><input id="pm-fornitore" type="text" placeholder="Partesa"></div>
+    <div class="field">
+      <label>Fornitore (obbligatorio)</label>
+      <select id="pm-fornitore-select" onchange="onFornitoreSelectChange(this.value)"></select>
+      <input id="pm-fornitore-nuovo" type="text" placeholder="Nome nuovo fornitore" style="display:none;margin-top:6px;">
+    </div>
     <div class="field"><label>Giacenza minima (bottiglie/pezzi da tenere sempre in cantina)</label><input id="pm-giacenza" type="number" step="1" min="0"></div>
     <div class="modal-actions">
       <button class="btn outline" id="pm-delete" onclick="eliminaProdotto()">Elimina</button>
@@ -890,11 +894,12 @@ function buildDefaultCocktail(prodotti){
     { nome:'Negroni Sbagliato', prezzoVendita:10, ingredienti:[ P('Vermouth Rosso (Carpano Classico)',30), P('Bitter Rosso (Campari)',30), P('Prosecco',30) ] },
     { nome:'Old Fashioned', prezzoVendita:10, ingredienti:[ P('Bourbon Whiskey (Bulleit)',50), P('Sciroppo di Zucchero (Giffard Canna)',7.5), P('Aromatic Bitters (Bitter Truth Old Time)',2) ] },
     { nome:'Paloma', prezzoVendita:10, ingredienti:[ P('Tequila Blanco (Espolon)',50), P('Succo di Lime',15), P('Soda al Pompelmo Rosa (Fever Tree)',120) ] },
-    { nome:'Spritz', prezzoVendita:10, ingredienti:[ P('Prosecco',90), P('Bitter Rosso (Campari)',60), P('Soda Water (San Bernardo Gas 75cl)',30) ] },
+    { nome:'Spritz Campari', prezzoVendita:10, ingredienti:[ P('Prosecco',90), P('Bitter Rosso (Campari)',60), P('Soda Water (San Bernardo Gas 75cl)',30) ] },
+    { nome:'Spritz Aperol', prezzoVendita:10, ingredienti:[ P('Prosecco',90), P('Aperol',60), P('Soda Water (San Bernardo Gas 75cl)',30) ] },
     { nome:'Whiskey Sour', prezzoVendita:10, ingredienti:[ P('Bourbon Whiskey (Bulleit)',50), P('Succo di Lime',22.5), P('Sciroppo di Zucchero (Giffard Canna)',15), P('Aromatic Bitters (Bitter Truth Old Time)',2), P('Sciroppo Egg White (Giffard)',15) ] },
   ];
   const SELEZIONATI_DEFAULT = new Set([
-    'Negroni','Spritz','Americano','Old Fashioned','Manhattan','Whiskey Sour',
+    'Negroni','Spritz Campari','Americano','Old Fashioned','Manhattan','Whiskey Sour',
     'Moscow Mule','Mojito Cubano','Espresso Martini',
     'Gin Tonic — London Dry','Gin Tonic — Floreale','Gin Tonic — Agrumato','Gin Tonic — Fruttato',
   ]);
@@ -929,7 +934,7 @@ const DEFAULT_HOTEL = {
 function creaStatoIniziale(){
   const prodotti = DEFAULT_PRODOTTI.map(p => ({...p}));
   const cocktail = [...buildDefaultCocktail(prodotti), ...buildDefaultDistillati(prodotti)];
-  return { hotel: {...DEFAULT_HOTEL}, prodotti, cocktail, giacenzeAttuali: {} };
+  return { hotel: {...DEFAULT_HOTEL}, prodotti, cocktail, giacenzeAttuali: {}, fornitori: ['Partesa'] };
 }
 
 // ---- Calcoli ----
@@ -976,8 +981,16 @@ function labelStato(stato){
 // ============ HCS MANAGER — APP LOGIC ============
 
 const STORAGE_KEY = 'hcs_manager_state_v5';
+function sincronizzaFornitori(){
+  const set = new Set(STATE.fornitori || ['Partesa']);
+  (STATE.prodotti||[]).forEach(p=>{ if(p.fornitore && p.fornitore.trim()) set.add(p.fornitore.trim()); });
+  STATE.fornitori = [...set].sort((a,b)=>a.localeCompare(b));
+}
+
 let STATE = loadState();
 STATE.giacenzeAttuali = STATE.giacenzeAttuali || {};
+STATE.fornitori = STATE.fornitori && STATE.fornitori.length ? STATE.fornitori : ['Partesa'];
+sincronizzaFornitori();
 let editingProdottoId = null;
 let openDrinkId = null;
 
@@ -1073,10 +1086,42 @@ function openProdottoModal(id){
   }
   document.getElementById('pm-prezzo').value = p.prezzoNetto;
   document.getElementById('pm-iva').value = p.iva;
-  document.getElementById('pm-fornitore').value = p.fornitore||'';
+  popolaFornitoreSelect(p.fornitore || 'Partesa');
   document.getElementById('pm-giacenza').value = p.giacenzaMin != null ? p.giacenzaMin : 1;
   document.getElementById('pm-delete').style.display = id ? 'inline-flex' : 'none';
   openModal('modal-prodotto');
+}
+
+function popolaFornitoreSelect(valoreSelezionato){
+  const sel = document.getElementById('pm-fornitore-select');
+  const nuovoInput = document.getElementById('pm-fornitore-nuovo');
+  nuovoInput.style.display = 'none';
+  nuovoInput.value = '';
+  const lista = (STATE.fornitori && STATE.fornitori.length) ? STATE.fornitori : ['Partesa'];
+  let opts = lista.map(f => `<option value="${escapeHtml(f)}">${escapeHtml(f)}</option>`).join('');
+  opts += `<option value="__nuovo__">+ Aggiungi nuovo fornitore...</option>`;
+  sel.innerHTML = opts;
+  if(valoreSelezionato && lista.includes(valoreSelezionato)){
+    sel.value = valoreSelezionato;
+  } else if(valoreSelezionato){
+    // fornitore esistente sul prodotto ma non ancora in lista (caso raro/dati importati)
+    sel.value = '__nuovo__';
+    nuovoInput.style.display = 'block';
+    nuovoInput.value = valoreSelezionato;
+  } else {
+    sel.value = lista[0];
+  }
+}
+
+function onFornitoreSelectChange(value){
+  const nuovoInput = document.getElementById('pm-fornitore-nuovo');
+  if(value === '__nuovo__'){
+    nuovoInput.style.display = 'block';
+    nuovoInput.focus();
+  } else {
+    nuovoInput.style.display = 'none';
+    nuovoInput.value = '';
+  }
 }
 
 function toggleFormatoCustom(){
@@ -1091,13 +1136,25 @@ function salvaProdotto(){
   const formatoMl = formatoSel === 'custom'
     ? (parseFloat(document.getElementById('pm-formato-custom').value) || 0)
     : parseFloat(formatoSel);
+
+  const fornitoreSelValue = document.getElementById('pm-fornitore-select').value;
+  let fornitore = fornitoreSelValue;
+  if(fornitoreSelValue === '__nuovo__'){
+    fornitore = document.getElementById('pm-fornitore-nuovo').value.trim();
+  }
+  if(!fornitore){ alert('Il fornitore è obbligatorio: selezionalo dalla tendina o aggiungine uno nuovo.'); return; }
+  if(!STATE.fornitori.includes(fornitore)){
+    STATE.fornitori.push(fornitore);
+    STATE.fornitori.sort((a,b)=>a.localeCompare(b));
+  }
+
   const data = {
     nome,
     categoria: document.getElementById('pm-categoria').value || 'Altro',
     formatoMl,
     prezzoNetto: parseFloat(document.getElementById('pm-prezzo').value) || 0,
     iva: parseFloat(document.getElementById('pm-iva').value) || 0,
-    fornitore: document.getElementById('pm-fornitore').value.trim(),
+    fornitore,
     giacenzaMin: parseFloat(document.getElementById('pm-giacenza').value) || 0,
   };
   if(editingProdottoId){
@@ -1541,6 +1598,8 @@ function caricaProgetto(event){
       if(!nuovoStato.prodotti || !nuovoStato.cocktail || !nuovoStato.hotel) throw new Error('Formato non riconosciuto');
       STATE = nuovoStato;
       STATE.giacenzeAttuali = STATE.giacenzeAttuali || {};
+      STATE.fornitori = STATE.fornitori && STATE.fornitori.length ? STATE.fornitori : ['Partesa'];
+      sincronizzaFornitori();
       saveState();
       alert('Progetto ripristinato correttamente.');
       document.getElementById('hotel-name-header').textContent = STATE.hotel.nome || '';
