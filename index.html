@@ -33,26 +33,29 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxRjFGMUYiLz48dGV4dCB4PSIzMiIgeT0iNDUiIGZvbnQtZmFtaWx5PSJNYW5yb3BlLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNDNThBMkEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSItMSI+RFM8L3RleHQ+PC9zdmc+">
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxRjFGMUYiLz48dGV4dCB4PSIzMiIgeT0iNDUiIGZvbnQtZmFtaWx5PSJNYW5yb3BlLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNDNThBMkEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSItMSI+RFM8L3RleHQ+PC9zdmc+">
 
-<!-- GA4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-F7T6WNL4MY"></script>
+<!-- GA4 / Meta / TikTok — caricati solo dopo consenso cookie (banner) -->
 <script>
+var _trackingLoaded = false;
+function _loadTracking() {
+  if (_trackingLoaded) return;
+  _trackingLoaded = true;
+
+  var ga = document.createElement('script');
+  ga.async = true;
+  ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-F7T6WNL4MY';
+  document.head.appendChild(ga);
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
   gtag('js', new Date());
   gtag('config', 'G-F7T6WNL4MY');
-</script>
 
-<!-- Meta Pixel -->
-<script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
   fbq('init','1470192824752382');
   fbq('track','PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1470192824752382&ev=PageView&noscript=1"/></noscript>
 
-<!-- TikTok Pixel -->
-<script>
   !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};ttq.load('D6LJGOJC77U4L3UM22C0');ttq.page();}(window,document,'ttq');
+}
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -413,6 +416,30 @@
     .avatar-ring { animation: none; }
     .cta-card, .cta-arrow, .social-btn { transition: none; }
   }
+
+  /* ── COOKIE CONSENT BANNER ── */
+  #cookie-banner{
+    position:fixed; left:.75rem; right:.75rem; bottom:.75rem; z-index:99999;
+    max-width:520px; margin:0 auto;
+    background:var(--surf); border:1px solid var(--brd); border-radius:16px;
+    padding:1.2rem 1.3rem; box-shadow:0 20px 50px rgba(0,0,0,.5);
+    display:none;
+  }
+  #cookie-banner.show{ display:block; }
+  #cookie-banner p{ font-size:.8rem; line-height:1.55; color:var(--txt2); margin-bottom:1rem; }
+  #cookie-banner a{ color:var(--blue-l); text-decoration:underline; }
+  .cookie-banner-actions{ display:flex; gap:.7rem; flex-wrap:wrap; }
+  .cookie-btn{
+    flex:1; min-width:130px; font-family:Poppins,sans-serif; font-weight:700; font-size:.8rem;
+    padding:.7rem 1rem; border-radius:10px; cursor:pointer; border:none;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .cookie-btn-accept{ background:var(--amber); color:var(--bg); }
+  .cookie-btn-reject{ background:var(--surf2); color:var(--txt); }
+  .cookie-prefs-link{
+    background:none; border:none; color:var(--dim); font-family:Poppins,sans-serif; font-size:.68rem;
+    text-decoration:underline; cursor:pointer; padding:0; opacity:0.8; display:block; margin:0.4rem auto 0;
+  }
 </style>
 </head>
 <body>
@@ -497,10 +524,49 @@
   </div>
 
   <!-- FOOTER -->
-  <div class="footer">© <span id="footer-year"></span> Daniel Sportelli</div>
+  <div class="footer">
+    © <span id="footer-year"></span> Daniel Sportelli
+    <button type="button" class="cookie-prefs-link" id="cookie-prefs-btn">Preferenze cookie</button>
+  </div>
   <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 
 </div>
+
+<div id="cookie-banner">
+  <p>Usiamo cookie tecnici (necessari) e, solo con il tuo consenso, cookie di analisi (Google Analytics) e marketing (Meta, TikTok) per capire come viene usato il sito. Puoi cambiare idea in qualsiasi momento dal link "Preferenze cookie" in fondo alla pagina.</p>
+  <div class="cookie-banner-actions">
+    <button type="button" class="cookie-btn cookie-btn-reject" id="cookie-reject-btn">Rifiuta</button>
+    <button type="button" class="cookie-btn cookie-btn-accept" id="cookie-accept-btn">Accetta tutti</button>
+  </div>
+</div>
+
+<script>
+// ── COOKIE CONSENT ────────────────────────────────────────────
+(function(){
+  var KEY = 'ds_cookie_consent'; // 'granted' | 'denied'
+  var banner = document.getElementById('cookie-banner');
+  var acceptBtn = document.getElementById('cookie-accept-btn');
+  var rejectBtn = document.getElementById('cookie-reject-btn');
+  var prefsBtn = document.getElementById('cookie-prefs-btn');
+
+  function applyChoice(choice){
+    localStorage.setItem(KEY, choice);
+    banner.classList.remove('show');
+    if (choice === 'granted') _loadTracking();
+  }
+
+  var saved = localStorage.getItem(KEY);
+  if (saved === 'granted') {
+    _loadTracking();
+  } else if (saved !== 'denied') {
+    banner.classList.add('show');
+  }
+
+  acceptBtn.addEventListener('click', function(){ applyChoice('granted'); });
+  rejectBtn.addEventListener('click', function(){ applyChoice('denied'); });
+  prefsBtn.addEventListener('click', function(){ banner.classList.add('show'); });
+})();
+</script>
 
 <script>
 // UTM tracking - aggiunge UTM di default su ogni click, propaga quelli in ingresso se presenti
