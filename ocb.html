@@ -1802,6 +1802,47 @@ function _loadTracking() {
   </div>
 </div>
 
+<div id="cookie-banner">
+  <p>Usiamo cookie tecnici (necessari) e, solo con il tuo consenso, cookie di analisi (Google Analytics) e marketing (Meta, TikTok) per capire come viene usato il sito. Puoi cambiare idea in qualsiasi momento dal link "Preferenze cookie" in fondo alla pagina.</p>
+  <div class="cookie-banner-actions">
+    <button type="button" class="cookie-btn cookie-btn-reject" id="cookie-reject-btn">Rifiuta</button>
+    <button type="button" class="cookie-btn cookie-btn-accept" id="cookie-accept-btn">Accetta tutti</button>
+  </div>
+</div>
+
+<script>
+// ── COOKIE CONSENT ────────────────────────────────────────────
+(function(){
+  var KEY = 'ds_cookie_consent'; // 'granted' | 'denied'
+  var banner = document.getElementById('cookie-banner');
+  var acceptBtn = document.getElementById('cookie-accept-btn');
+  var rejectBtn = document.getElementById('cookie-reject-btn');
+  // "Preferenze cookie" vive nel footer, dentro #main-content, che a
+  // questo punto dello script non esiste ancora nel DOM (rivelato solo
+  // dopo la selezione nazione) — delega sul document invece di un
+  // riferimento diretto, funziona indipendentemente da quando compare.
+  document.addEventListener('click', function(e){
+    if (e.target && e.target.id === 'cookie-prefs-btn') banner.classList.add('show');
+  });
+
+  function applyChoice(choice){
+    localStorage.setItem(KEY, choice);
+    banner.classList.remove('show');
+    if (choice === 'granted') _loadTracking();
+  }
+
+  var saved = localStorage.getItem(KEY);
+  if (saved === 'granted') {
+    _loadTracking();
+  } else if (saved !== 'denied') {
+    banner.classList.add('show');
+  }
+
+  acceptBtn.addEventListener('click', function(){ applyChoice('granted'); });
+  rejectBtn.addEventListener('click', function(){ applyChoice('denied'); });
+})();
+</script>
+
 <div class="page main-content" id="main-content">
 
   <div style="display:flex;justify-content:space-between;align-items:center;padding-top:max(0.5rem, env(safe-area-inset-top, 0.5rem));">
@@ -2221,42 +2262,6 @@ function _loadTracking() {
   <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 
 </div>
-
-<div id="cookie-banner">
-  <p>Usiamo cookie tecnici (necessari) e, solo con il tuo consenso, cookie di analisi (Google Analytics) e marketing (Meta, TikTok) per capire come viene usato il sito. Puoi cambiare idea in qualsiasi momento dal link "Preferenze cookie" in fondo alla pagina.</p>
-  <div class="cookie-banner-actions">
-    <button type="button" class="cookie-btn cookie-btn-reject" id="cookie-reject-btn">Rifiuta</button>
-    <button type="button" class="cookie-btn cookie-btn-accept" id="cookie-accept-btn">Accetta tutti</button>
-  </div>
-</div>
-
-<script>
-// ── COOKIE CONSENT ────────────────────────────────────────────
-(function(){
-  var KEY = 'ds_cookie_consent'; // 'granted' | 'denied'
-  var banner = document.getElementById('cookie-banner');
-  var acceptBtn = document.getElementById('cookie-accept-btn');
-  var rejectBtn = document.getElementById('cookie-reject-btn');
-  var prefsBtn = document.getElementById('cookie-prefs-btn');
-
-  function applyChoice(choice){
-    localStorage.setItem(KEY, choice);
-    banner.classList.remove('show');
-    if (choice === 'granted') _loadTracking();
-  }
-
-  var saved = localStorage.getItem(KEY);
-  if (saved === 'granted') {
-    _loadTracking();
-  } else if (saved !== 'denied') {
-    banner.classList.add('show');
-  }
-
-  acceptBtn.addEventListener('click', function(){ applyChoice('granted'); });
-  rejectBtn.addEventListener('click', function(){ applyChoice('denied'); });
-  prefsBtn.addEventListener('click', function(){ banner.classList.add('show'); });
-})();
-</script>
 
 <script>
 
