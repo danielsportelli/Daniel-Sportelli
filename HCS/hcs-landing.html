@@ -4,22 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Hotel Cocktail System | Daniel Sportelli</title>
-<meta name="description" content="Attiva un nuovo centro di ricavo nel tuo hotel, formando il personale già presente — senza assumere un bartender dedicato.">
+<meta name="description" content="Attiva un nuovo centro di ricavo nel tuo hotel, formando il personale già presente, senza assumere un bartender dedicato.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://danielsportelli.it/hcs/">
+<link rel="canonical" href="https://danielsportelli.it/hcs-landing.html">
 
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://danielsportelli.it/hcs/">
+<meta property="og:url" content="https://danielsportelli.it/hcs-landing.html">
 <meta property="og:title" content="Hotel Cocktail System | Daniel Sportelli">
-<meta property="og:description" content="Attiva un nuovo centro di ricavo nel tuo hotel, formando il personale già presente — senza assumere un bartender dedicato.">
+<meta property="og:description" content="Attiva un nuovo centro di ricavo nel tuo hotel, formando il personale già presente, senza assumere un bartender dedicato.">
 <meta property="og:locale" content="it_IT">
-<meta property="og:image" content="https://danielsportelli.it/HCS/og-hcs.png">
+<meta property="og:image" content="https://danielsportelli.it/og-hcs.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hotel Cocktail System | Daniel Sportelli">
-<meta name="twitter:description" content="Attiva un nuovo centro di ricavo nel tuo hotel, formando il personale già presente — senza assumere un bartender dedicato.">
+<meta name="twitter:description" content="Attiva un nuovo centro di ricavo nel tuo hotel, formando il personale già presente, senza assumere un bartender dedicato.">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -229,8 +229,41 @@ function _loadTracking() {
   @media (min-width:640px){ .steps-grid{ grid-template-columns:1fr 1fr; } }
   .step-card {
     background: var(--surf); border:1px solid var(--brd); border-radius:14px; padding:1.3rem;
+    position:relative; overflow:hidden;
+    animation: sectionIn .6s ease-out both;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
   }
-  .step-num { font-family:Manrope,sans-serif; font-weight:900; color:var(--amber); font-size:1.5rem; line-height:1; margin-bottom:0.6rem; }
+  .step-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, var(--amber), var(--amber-l));
+    transform: scaleX(0); transform-origin:left;
+    animation: stepBarIn .7s ease-out both;
+  }
+  .steps-grid .step-card:nth-child(1){ animation-delay:.05s; }
+  .steps-grid .step-card:nth-child(1)::before{ animation-delay:.4s; }
+  .steps-grid .step-card:nth-child(2){ animation-delay:.14s; }
+  .steps-grid .step-card:nth-child(2)::before{ animation-delay:.49s; }
+  .steps-grid .step-card:nth-child(3){ animation-delay:.23s; }
+  .steps-grid .step-card:nth-child(3)::before{ animation-delay:.58s; }
+  .steps-grid .step-card:nth-child(4){ animation-delay:.32s; }
+  .steps-grid .step-card:nth-child(4)::before{ animation-delay:.67s; }
+  .steps-grid .step-card:nth-child(5){ animation-delay:.41s; }
+  .steps-grid .step-card:nth-child(5)::before{ animation-delay:.76s; }
+  @keyframes stepBarIn { to { transform:scaleX(1); } }
+  @media (hover:hover){
+    .step-card:hover { transform:translateY(-4px); border-color:rgba(197,138,42,0.42); box-shadow:0 14px 30px -14px rgba(197,138,42,0.4); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .step-card, .step-card::before { animation:none; opacity:1; transform:none; }
+  }
+  .step-num {
+    display:flex; align-items:center; justify-content:center;
+    width:42px; height:42px; border-radius:50%; flex-shrink:0;
+    background: linear-gradient(135deg, var(--amber-l), var(--amber-d));
+    color:#1F1F1F; font-family:Manrope,sans-serif; font-weight:900; font-size:1rem; line-height:1;
+    margin-bottom:0.8rem;
+    box-shadow: 0 0 0 5px rgba(197,138,42,0.14), 0 6px 16px -5px rgba(197,138,42,0.55);
+  }
   .step-title { font-weight:700; font-family:Manrope,sans-serif; font-size:0.95rem; margin-bottom:0.4rem; }
   .step-desc { font-size:0.85rem; color:var(--txt2); line-height:1.55; }
 
@@ -246,9 +279,29 @@ function _loadTracking() {
   .roi-factor .num { font-family:Manrope,sans-serif; font-weight:800; font-size:1.25rem; color:var(--amber); }
   .roi-factor .label { font-size:0.58rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--dim); margin-top:0.25rem; }
 
-  .roi-result { background:linear-gradient(135deg, rgba(197,138,42,0.14), rgba(197,138,42,0.03)); border:1px solid rgba(197,138,42,0.35); border-radius:16px; padding:1.7rem; text-align:center; margin-bottom:1.1rem; }
+  .roi-result { background:linear-gradient(135deg, rgba(197,138,42,0.14), rgba(197,138,42,0.03)); border:1px solid rgba(197,138,42,0.35); border-radius:16px; padding:1.7rem 1.7rem 1.4rem; text-align:center; margin-bottom:1.1rem; overflow:hidden; }
   .roi-result .amount { font-family:Manrope,sans-serif; font-weight:900; font-size:clamp(2rem,8vw,2.8rem); color:var(--amber); letter-spacing:-0.02em; }
   .roi-result .desc { font-size:0.82rem; color:var(--txt2); margin-top:0.35rem; }
+
+  /* ── Growth chart (animated) ── */
+  .growth-chart { margin-bottom:1.1rem; }
+  .growth-chart svg { width:100%; height:auto; display:block; overflow:visible; }
+  .gc-area { opacity:0; animation: gcAreaIn 1s ease-out .5s both; }
+  .gc-line { stroke-dasharray:1000; stroke-dashoffset:1000; animation: gcDraw 1.5s ease-out .3s both; }
+  .gc-dot { opacity:0; animation: gcDotIn .3s ease-out 1.7s both, gcGlow 2.2s ease-in-out 2s infinite; }
+  .gc-labels { display:flex; justify-content:space-between; font-size:0.62rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.06em; margin-top:0.5rem; }
+  @keyframes gcDraw { to { stroke-dashoffset:0; } }
+  @keyframes gcAreaIn { to { opacity:1; } }
+  @keyframes gcDotIn { to { opacity:1; } }
+  @keyframes gcGlow {
+    0%,100% { filter: drop-shadow(0 0 0px rgba(197,138,42,0.85)); }
+    50% { filter: drop-shadow(0 0 7px rgba(197,138,42,0.9)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gc-area{ animation:none; opacity:1; }
+    .gc-line{ animation:none; stroke-dashoffset:0; }
+    .gc-dot{ animation:none; opacity:1; }
+  }
 
   .price-box { border:1px solid var(--brd); border-radius:14px; padding:1.5rem; text-align:center; margin-top:1.2rem; background:var(--surf); }
   .price-box .label { font-size:0.72rem; color:var(--dim); margin-bottom:0.5rem; }
@@ -340,7 +393,7 @@ function _loadTracking() {
   <div class="wrap">
     <div class="eyebrow">Per hotel con ristorante interno</div>
     <h1>State perdendo fatturato <em>ogni sera</em>, in silenzio.</h1>
-    <p class="sub">Se durante l'aperitivo, la cena e il dopocena il vostro hotel non propone un'offerta cocktail strutturata, è un'occasione di ricavo che resta inespressa — sera dopo sera, con lo staff che avete già in organico.</p>
+    <p class="sub">Se durante l'aperitivo, la cena e il dopocena il vostro hotel non propone un'offerta cocktail strutturata, è un'occasione di ricavo che, con lo staff che avete già in organico, resta inespressa sera dopo sera.</p>
     <div class="hero-ctas">
       <a href="#cta-finale" class="btn-primary" onclick="if(typeof gtag==='function')gtag('event','click_cta_hero',{event_category:'cta'});">Prenota la tua call gratuita</a>
       <a href="#soluzione" class="btn-secondary">Scopri come funziona</a>
@@ -358,7 +411,7 @@ function _loadTracking() {
   <div class="wrap reveal">
     <p class="s-label">Il problema</p>
     <h2 class="s-title">Ogni sera, l'ospite ha solo tre opzioni.</h2>
-    <p class="s-text">Acqua, vino o bibite. Oppure decide di cercare un'esperienza più completa fuori dall'hotel, finendo per spendere i propri soldi altrove — mentre voi restate a guardare.</p>
+    <p class="s-text">Acqua, vino o bibite. Oppure decide di cercare un'esperienza più completa fuori dall'hotel, finendo per spendere i propri soldi altrove, mentre voi restate a guardare.</p>
     <div class="callout"><b>Il punto non è diventare un cocktail bar.</b> È smettere di lasciare sul tavolo un fatturato che oggi è del tutto raggiungibile con le risorse che già avete in hotel.</div>
   </div>
 </section>
@@ -368,7 +421,7 @@ function _loadTracking() {
   <div class="wrap reveal">
     <p class="s-label">La soluzione</p>
     <h2 class="s-title">Hotel Cocktail System.</h2>
-    <p class="s-text">Il metodo prevede la formazione di 3 camerieri che fanno già parte del vostro organico — idealmente proprio 3, per garantire un turnover e coprire tutti i turni di servizio — perché diventino operatori in grado di servire con sicurezza una drink list professionale, in ogni momento della giornata.</p>
+    <p class="s-text">Il metodo prevede la formazione di 3 camerieri che fanno già parte del vostro organico (idealmente proprio 3, per garantire un turnover e coprire tutti i turni di servizio), perché diventino operatori in grado di servire con sicurezza una drink list professionale, in ogni momento della giornata.</p>
     <p class="s-text">Non devono conoscere la mixology. Devono semplicemente:</p>
     <ul class="checklist yes">
       <li><span class="mark">✓</span><span>seguire ricette standard;</span></li>
@@ -452,9 +505,9 @@ function _loadTracking() {
   <div class="wrap reveal">
     <p class="s-label">Il gestionale</p>
     <h2 class="s-title">HCS Manager: il drink cost sempre sotto controllo.</h2>
-    <p class="s-text">Ogni hotel riceve accesso a HCS Manager, il gestionale pensato per calcolare in automatico il costo di ogni drink e verificare che i prezzi in carta siano corretti — senza fogli Excel da tenere aggiornati a mano.</p>
-    <div class="manager-shot"><img src="/immagini/HCS/hcs-manager-screenshot.webp" alt="Anteprima del gestionale HCS Manager — report drink cost e margini" loading="lazy"></div>
-    <p class="manager-caption">Anteprima del report riepilogativo — dati dimostrativi</p>
+    <p class="s-text">Ogni hotel riceve accesso a HCS Manager, il gestionale pensato per calcolare in automatico il costo di ogni drink e verificare che i prezzi in carta siano corretti, senza fogli Excel da tenere aggiornati a mano.</p>
+    <div class="manager-shot"><img src="/assets/landing/hcs-manager-screenshot.webp" alt="Anteprima del gestionale HCS Manager, report drink cost e margini" loading="lazy"></div>
+    <p class="manager-caption">Anteprima del report riepilogativo (dati dimostrativi)</p>
     <p class="s-text">Basta inserire il prezzo di vendita di ogni drink: il sistema calcola automaticamente il costo, il margine e segnala con un semaforo se il prezzo è impostato correttamente. Se cambia il prezzo di un prodotto, tutti i cocktail che lo utilizzano si aggiornano da soli.</p>
   </div>
 </section>
@@ -472,10 +525,24 @@ function _loadTracking() {
       <div class="roi-factor"><div class="num">10€</div><div class="label">Prezzo medio</div></div>
     </div>
     <div class="roi-result">
+      <div class="growth-chart">
+        <svg viewBox="0 0 600 190" preserveAspectRatio="none" role="img" aria-label="Grafico che mostra la crescita del fatturato aggiuntivo da 0 a 18.000 euro nell'arco di 12 mesi">
+          <defs>
+            <linearGradient id="gcFillHCS" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#C58A2A" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#C58A2A" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="gc-area" fill="url(#gcFillHCS)" d="M0,182 C70,178 130,166 190,150 C250,132 300,104 360,78 C420,54 480,30 596,12 L600,12 L600,190 L0,190 Z"/>
+          <path class="gc-line" fill="none" stroke="#C58A2A" stroke-width="3.5" stroke-linecap="round" d="M0,182 C70,178 130,166 190,150 C250,132 300,104 360,78 C420,54 480,30 596,12"/>
+          <circle class="gc-dot" cx="596" cy="12" r="7" fill="#C58A2A"/>
+        </svg>
+        <div class="gc-labels"><span>Mese 1</span><span>Mese 6</span><span>Mese 12</span></div>
+      </div>
       <div class="amount">18.000 €</div>
       <div class="desc">di fatturato annuo aggiuntivo potenziale</div>
     </div>
-    <p class="s-text">Con un investimento contenuto, il servizio si ripaga in pochi giorni di attività a regime — e continua a generare fatturato ogni sera, senza costi di personale aggiuntivi.</p>
+    <p class="s-text">Con un investimento contenuto, il servizio si ripaga in pochi giorni di attività a regime, e continua a generare fatturato ogni sera, senza costi di personale aggiuntivi.</p>
     <div class="price-box">
       <div class="label">Investimento per l'attivazione completa del servizio</div>
       <div class="price">1.490 € + IVA</div>
@@ -527,10 +594,10 @@ function _loadTracking() {
   <div class="wrap reveal">
     <p class="s-label">Chi sono</p>
     <div class="bio-row">
-      <div class="bio-photo"><img src="/immagini/HCS/daniel-photo.webp" alt="Daniel Sportelli" loading="lazy"></div>
+      <div class="bio-photo"><img src="/assets/landing/daniel-photo.webp" alt="Daniel Sportelli" loading="lazy"></div>
       <div>
         <h2 class="s-title" style="margin-bottom:0.6rem;">Quindici anni al servizio dell'ospitalità.</h2>
-        <p class="s-text" style="margin-bottom:0;">Sono Daniel Sportelli, bartender professionista e formatore da oltre 15 anni. Il mio percorso è partito dal servizio quotidiano dietro al bancone, per poi ampliarsi verso la gestione operativa dei locali e, negli ultimi anni, verso la formazione professionale — oggi il cuore del mio lavoro.</p>
+        <p class="s-text" style="margin-bottom:0;">Sono Daniel Sportelli, bartender professionista e formatore da oltre 15 anni. Il mio percorso è partito dal servizio quotidiano dietro al bancone, per poi ampliarsi verso la gestione operativa dei locali e, negli ultimi anni, verso la formazione professionale, oggi il cuore del mio lavoro.</p>
       </div>
     </div>
   </div>
