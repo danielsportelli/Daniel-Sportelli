@@ -54,6 +54,11 @@ function _loadTracking() {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<!-- Calendly (popup): il bottone di prenotazione apre l'overlay senza mai lasciare la pagina.
+     Se lo script non si carica, il link funziona comunque come link normale a Calendly. -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
 <style>
   :root {
     --amber:   #C58A2A;
@@ -395,7 +400,7 @@ function _loadTracking() {
     <h1>State perdendo fatturato <em>ogni sera</em>, in silenzio.</h1>
     <p class="sub">Se durante l'aperitivo, la cena e il dopocena il vostro hotel non propone un'offerta cocktail strutturata, è un'occasione di ricavo che, con lo staff che avete già in organico, resta inespressa sera dopo sera.</p>
     <div class="hero-ctas">
-      <a href="#cta-finale" class="btn-primary" onclick="if(typeof gtag==='function')gtag('event','click_cta_hero',{event_category:'cta'});">Prenota la tua call gratuita</a>
+      <a href="#cta-finale" class="btn-primary" onclick="if(typeof gtag==='function')gtag('event','click_cta_hero',{event_category:'cta'});">Prenota la tua call</a>
       <a href="#soluzione" class="btn-secondary">Scopri come funziona</a>
     </div>
     <div class="badges">
@@ -609,7 +614,7 @@ function _loadTracking() {
     <p class="s-label">Come procedere</p>
     <h2>Il prossimo passo è una call di 30 minuti.</h2>
     <p>Verifichiamo insieme se il vostro hotel ha il profilo giusto e i punti chiave per attivare il servizio, senza impegno.</p>
-    <a href="https://calendly.com/danielsportelli/pre-attivazione-cocktail-system" id="cta-book-call" class="btn-primary" target="_blank" rel="noopener" onclick="if(typeof gtag==='function')gtag('event','click_cta_finale',{event_category:'cta'});if(typeof fbq==='function')fbq('trackCustom','ClickCTA',{content_name:'hcs_book_call'});if(typeof ttq!=='undefined')ttq.track('ClickButton',{content_name:'hcs_book_call'});">Prenota la tua call gratuita</a>
+    <a href="https://calendly.com/danielsportelli/pre-attivazione-cocktail-system" id="cta-book-call" class="btn-primary" target="_blank" rel="noopener" onclick="if(typeof gtag==='function')gtag('event','click_cta_finale',{event_category:'cta'});if(typeof fbq==='function')fbq('trackCustom','ClickCTA',{content_name:'hcs_book_call'});if(typeof ttq!=='undefined')ttq.track('ClickButton',{content_name:'hcs_book_call'});if(typeof Calendly!=='undefined'){Calendly.initPopupWidget({url:'https://calendly.com/danielsportelli/pre-attivazione-cocktail-system'});return false;}">Prenota la tua call</a>
   </div>
 </section>
 
