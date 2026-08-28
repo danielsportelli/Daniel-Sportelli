@@ -400,6 +400,18 @@ function _loadTracking() {
   .social-btn svg { width: 18px; height: 18px; fill: currentColor; }
   .social-btn.mail svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
+  /* ── SEZIONE FORMAZIONE B2B ── */
+  .section-block { margin-bottom: 2.25rem; }
+
+  .cocktail-system-panel {
+    padding: 1.1rem;
+    border-radius: 20px;
+    background: rgba(197,138,42,0.05);
+    border: 1px solid rgba(197,138,42,0.22);
+  }
+
+  .cocktail-system-panel .cta-stack { margin-bottom: 0; }
+
   /* ── DIVIDER ── */
   .divider { height: 1px; background: var(--brd); margin: 1.75rem 0; }
 
@@ -473,65 +485,79 @@ function _loadTracking() {
     <div class="formazione-text">Co-fondatore di Botanic Academy, scuola di barman ad Arcene (BG). Corsi Barman accreditati (Regione Lombardia, GOL). Materiali didattici originali e laboratori pratici.</div>
   </div>
 
-  <!-- SERVIZI -->
-  <p class="section-label">Servizi</p>
-  <div class="cta-stack">
+  <!-- FORMAZIONE B2B: HCS + RCS -->
+  <div class="section-block">
+    <p class="section-label">Formazione B2B</p>
+    <div class="cocktail-system-panel">
+      <div class="cta-stack">
 
-    <a id="card-hcs" href="HCS/hcs-landing.html" class="cta-card amber" onclick="if(typeof gtag==='function')gtag('event','click_hcs',{event_category:'cta'});">
-      <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg></div>
-      <div class="cta-text">
-        <div class="cta-title">Hotel Cocktail System</div>
-        <div class="cta-desc">Programma formazione per hotel</div>
-        <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Scopri il programma</div>
-      </div>
-      <span class="cta-arrow">→</span>
-    </a>
+        <a id="card-hcs" href="HCS/hcs-landing.html" class="cta-card amber" onclick="if(typeof gtag==='function')gtag('event','click_hcs',{event_category:'cta'});">
+          <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg></div>
+          <div class="cta-text">
+            <div class="cta-title">Hotel Cocktail System</div>
+            <div class="cta-desc">Programma formazione per hotel</div>
+            <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Scopri il programma</div>
+          </div>
+          <span class="cta-arrow">→</span>
+        </a>
 
-    <a id="card-rcs" href="RCS/rcs-landing.html" class="cta-card amber" onclick="if(typeof gtag==='function')gtag('event','click_rcs',{event_category:'cta'});">
-      <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg></div>
-      <div class="cta-text">
-        <div class="cta-title">Restaurant Cocktail System</div>
-        <div class="cta-desc">Programma formazione per ristoranti</div>
-        <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Scopri il programma</div>
-      </div>
-      <span class="cta-arrow">→</span>
-    </a>
+        <a id="card-rcs" href="RCS/rcs-landing.html" class="cta-card amber" onclick="if(typeof gtag==='function')gtag('event','click_rcs',{event_category:'cta'});">
+          <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg></div>
+          <div class="cta-text">
+            <div class="cta-title">Restaurant Cocktail System</div>
+            <div class="cta-desc">Programma formazione per ristoranti</div>
+            <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Scopri il programma</div>
+          </div>
+          <span class="cta-arrow">→</span>
+        </a>
 
-    <div class="cta-card amber no-link">
-      <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.2" r="5.6"/><circle cx="7.6" cy="15.6" r="5.6"/><circle cx="16.4" cy="15.6" r="5.6"/></svg></div>
-      <div class="cta-text">
-        <div class="cta-title">Team Cocktail Experience</div>
-        <div class="cta-desc">Format di team building aziendale.</div>
-        <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Prossimamente disponibile</div>
+        <div class="cta-card amber no-link">
+          <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.2" r="5.6"/><circle cx="7.6" cy="15.6" r="5.6"/><circle cx="16.4" cy="15.6" r="5.6"/></svg></div>
+          <div class="cta-text">
+            <div class="cta-title">Team Cocktail Experience</div>
+            <div class="cta-desc">Format di team building aziendale.</div>
+            <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Prossimamente disponibile</div>
+          </div>
+        </div>
+
       </div>
     </div>
+  </div>
 
-    <a id="card-ccc" href="/OCB/ocb.html" class="cta-card amber" onclick="if(typeof gtag==='function')gtag('event','click_ccc',{event_category:'cta'});if(typeof fbq==='function')fbq('trackCustom','ClickCTA',{content_name:'ccc'});if(typeof ttq!=='undefined')ttq.track('ClickButton',{content_name:'ccc'});">
-      <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-8 9z"/><line x1="12" y1="13" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg></div>
-      <div class="cta-text">
-        <div class="cta-title">Open Cocktail Bar</div>
-        <div class="cta-desc">Bar catering professionale per eventi aziendali.</div>
-        <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Calcola il preventivo online.</div>
-      </div>
-      <span class="cta-arrow">→</span>
-    </a>
+  <!-- EVENTI -->
+  <div class="section-block">
+    <p class="section-label">Eventi</p>
+    <div class="cta-stack">
 
+      <a id="card-ccc" href="/OCB/ocb.html" class="cta-card amber" onclick="if(typeof gtag==='function')gtag('event','click_ccc',{event_category:'cta'});if(typeof fbq==='function')fbq('trackCustom','ClickCTA',{content_name:'ccc'});if(typeof ttq!=='undefined')ttq.track('ClickButton',{content_name:'ccc'});">
+        <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-8 9z"/><line x1="12" y1="13" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg></div>
+        <div class="cta-text">
+          <div class="cta-title">Open Cocktail Bar</div>
+          <div class="cta-desc">Bar catering professionale per eventi aziendali.</div>
+          <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Calcola il preventivo online.</div>
+        </div>
+        <span class="cta-arrow">→</span>
+      </a>
+
+    </div>
   </div>
 
   <!-- PROGETTI -->
-  <p class="section-label">Progetti</p>
-  <div class="cta-stack">
+  <div class="section-block">
+    <p class="section-label">Progetti</p>
+    <div class="cta-stack">
 
-    <a id="card-cl" href="https://cocktaillegend.app" class="cta-card amber" target="_blank" rel="noopener" onclick="if(typeof gtag==='function')gtag('event','click_cocktail_legend',{event_category:'cta'});if(typeof fbq==='function')fbq('trackCustom','ClickCTA',{content_name:'cocktail_legend'});if(typeof ttq!=='undefined')ttq.track('ClickButton',{content_name:'cocktail_legend'});">
-      <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
-      <div class="cta-text">
-        <div class="cta-title">Cocktail Legend</div>
-        <div class="cta-desc">L'app italiana per bartender professionisti.</div>
-        <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Registrati gratis e provala subito!</div>
-      </div>
-      <span class="cta-arrow">→</span>
-    </a>
+      <a id="card-cl" href="https://cocktaillegend.app" class="cta-card amber" target="_blank" rel="noopener" onclick="if(typeof gtag==='function')gtag('event','click_cocktail_legend',{event_category:'cta'});if(typeof fbq==='function')fbq('trackCustom','ClickCTA',{content_name:'cocktail_legend'});if(typeof ttq!=='undefined')ttq.track('ClickButton',{content_name:'cocktail_legend'});">
+        <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
+        <div class="cta-text">
+          <div class="cta-title">Cocktail Legend</div>
+          <div class="cta-desc">L'app italiana per bartender professionisti.</div>
+          <div class="cta-desc" style="color:var(--amber);font-size:0.75rem;margin-top:2px;">Registrati gratis e provala subito!</div>
+        </div>
+        <span class="cta-arrow">→</span>
+      </a>
 
+    </div>
   </div>
 
   <!-- FOOTER -->
