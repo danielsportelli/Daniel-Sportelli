@@ -346,22 +346,6 @@ function _loadTracking() {
   .footer a { color:var(--dim); }
   .footer .links { display:flex; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
 
-  /* ── STICKY BOTTOM CTA (mobile) ── */
-  #sticky-cta {
-    position: fixed; left:0; right:0; bottom:0; z-index: 400;
-    background: rgba(31,31,31,0.92); backdrop-filter: blur(10px);
-    border-top: 1px solid var(--brd);
-    padding: 0.75rem 1.1rem;
-    padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
-    transform: translateY(120%);
-    transition: transform .3s ease;
-  }
-  #sticky-cta.show { transform: translateY(0); }
-  #sticky-cta .row { max-width:680px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
-  #sticky-cta .txt { font-size:0.78rem; color:var(--txt2); display:none; }
-  @media (min-width:480px){ #sticky-cta .txt{ display:block; } }
-  #sticky-cta .btn-primary { padding:0.75rem 1.4rem; font-size:0.85rem; white-space:nowrap; }
-
   /* ── COOKIE CONSENT BANNER ── */
   #cookie-banner{
     position:fixed; left:.75rem; right:.75rem; bottom:.75rem; z-index:99999;
@@ -632,14 +616,6 @@ function _loadTracking() {
 </div>
 <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 
-<!-- STICKY BOTTOM CTA -->
-<div id="sticky-cta">
-  <div class="row">
-    <div class="txt">Pronto ad attivare Restaurant Cocktail System?</div>
-    <a href="#cta-finale" class="btn-primary" onclick="if(typeof gtag==='function')gtag('event','click_cta_sticky_rcs',{event_category:'cta'});">Prenota la call</a>
-  </div>
-</div>
-
 <div id="cookie-banner">
   <p>Usiamo cookie tecnici (necessari) e, solo con il tuo consenso, cookie di analisi (Google Analytics) e marketing (Meta, TikTok) per capire come viene usato il sito. Puoi cambiare idea in qualsiasi momento dal link "Preferenze cookie" in fondo alla pagina.</p>
   <div class="cookie-banner-actions">
@@ -669,29 +645,6 @@ function _loadTracking() {
   prefsBtn.addEventListener('click', function(){ banner.classList.add('show'); });
 })();
 
-// ── STICKY CTA VISIBILITY ─────────────────────────────────────
-(function(){
-  var sticky = document.getElementById('sticky-cta');
-  var hero = document.querySelector('.hero');
-  if (!sticky || !hero) return;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if (!entry.isIntersecting) sticky.classList.add('show');
-      else sticky.classList.remove('show');
-    });
-  }, { threshold: 0 });
-  io.observe(hero);
-
-  var finalCta = document.getElementById('cta-finale');
-  if (finalCta) {
-    var io2 = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (entry.isIntersecting) sticky.classList.remove('show');
-      });
-    }, { threshold: 0.3 });
-    io2.observe(finalCta);
-  }
-})();
 </script>
 </body>
 </html>
